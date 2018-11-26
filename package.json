@@ -1,0 +1,19 @@
+{
+  "name": "ca-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CA-elections/frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CA-elections/frontend/issues"
+  },
+  "homepage": "https://github.com/CA-elections/frontend#readme"
+}
