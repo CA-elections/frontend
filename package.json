@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/CA-elections/frontend/issues"
   },
-  "homepage": "https://github.com/CA-elections/frontend#readme"
+  "homepage": "https://github.com/CA-elections/frontend#readme",
+  "dependencies": {
+    "@types/react": "^16.7.7",
+    "@types/react-dom": "^16.0.10",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.1.6",
+    "webpack-cli": "^3.1.2"
+  }
 }
