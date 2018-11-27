@@ -1,9 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import Navigation from "./parts/Navigation";
+import Navigation from "./components/Navigation";
+import Frontpage from "./pages/Frontpage";
 
 ReactDOM.render(
-	<Navigation/>,
+<div>
+			<Navigation/>
+			<Frontpage/>
+		</div>,
 	document.getElementById("example")
 );

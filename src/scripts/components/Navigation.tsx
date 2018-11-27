@@ -23,6 +23,7 @@ function Navigation(props: any) {
 		<div className={classes.root}>
 			<AppBar position="static">
 				<Toolbar>
+
 					<Typography variant="h6" color="inherit" className={classes.grow}>
 						Kepler - Hlasování
 					</Typography>
