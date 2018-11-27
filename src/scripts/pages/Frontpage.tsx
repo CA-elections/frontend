@@ -61,7 +61,7 @@ function Frontpage(props: any) {
 						20.11.2018 - 27.11.2018
 					</Typography>
 				</ExpansionPanelSummary>
-				<ExpansionPanelDetails className={classNames('panel-asd'}>
+				<ExpansionPanelDetails>
 					<Typography>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
 						sit amet blandit leo lobortis eget.
