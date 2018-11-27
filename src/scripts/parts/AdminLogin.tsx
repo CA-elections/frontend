@@ -31,6 +31,8 @@ export default class AdminLogin extends React.Component {
 
   state = {
     password: '',
+    error: false,
+    errorText: '',
     showPassword: false
   }
 
@@ -43,7 +45,12 @@ export default class AdminLogin extends React.Component {
   };
 
   handleClickSubmit = () => {
-    this.props.onSubmit(this.state.password);
+    if (this.state.password === '') {
+      this.setState({ error: true, errorText: 'Vyplňte heslo' });
+
+    } else {
+      this.props.onSubmit(this.state.password);
+    }
   };
 
   render() {
@@ -52,12 +59,12 @@ export default class AdminLogin extends React.Component {
         container
         spacing={24}
         direction="column"
+        alignContent="center"
         alignItems="center"
         justify="center"
-      >
-        <Grid item xs={12}></Grid>
 
-        <Grid item sm={12}>
+        className="layout-content-grid"
+      >
           <Paper>
             <Grid
               container
@@ -66,22 +73,23 @@ export default class AdminLogin extends React.Component {
               alignItems="center"
               justify="center"
 
-              className="layout-content-grid"
+              className="layout-inner-grid"
             >
-              <Grid item xs="auto">
-                  <Typography variant="title" color="inherit" className="layout-title">
-                    Administrátor - Přihlášení
-                  </Typography>
-              </Grid>
-
-              <Grid item xs="auto">
+              <Grid item md="auto">
                 <FormControl className="text-field">
-                  <InputLabel htmlFor="passwordField">Heslo</InputLabel>
+                  <InputLabel
+                    htmlFor="passwordField"
+                    error={this.state.error}
+                  >
+                    Heslo
+                  </InputLabel>
+
                   <Input
                     id="passwordField"
                     type={this.state.showPassword ? 'text' : 'password'}
                     value={this.state.password}
                     onChange={this.handleChangePassword}
+                    error={this.state.error}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -96,9 +104,10 @@ export default class AdminLogin extends React.Component {
                 </FormControl>
               </Grid>
 
-              <Grid item xs="auto">
+              <Grid item md="auto">
                 <Button
                   variant="contained"
+                  color="primary"
                   className="layout-button"
                   onClick={this.handleClickSubmit}
                 >
@@ -107,7 +116,7 @@ export default class AdminLogin extends React.Component {
               </Grid>
             </Grid>
           </Paper>
-        </Grid>
+
       </Grid>
     );
   }
