@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import * as PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -23,13 +24,15 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 export default class AdminLogin extends React.Component {
-	props: any;
+  static propTypes = {
+    onSubmit: PropTypes.object.isRequired
+  };
+  props: any;
 
   state = {
     password: '',
     showPassword: false
   }
-
 
   handleChangePassword = (event: any) => {
     this.setState({ password: event.target.value });
@@ -37,6 +40,10 @@ export default class AdminLogin extends React.Component {
 
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
+  };
+
+  handleClickSubmit = () => {
+    this.props.onSubmit(this.state.password);
   };
 
   render() {
@@ -90,7 +97,11 @@ export default class AdminLogin extends React.Component {
               </Grid>
 
               <Grid item xs="auto">
-                <Button variant="contained" className="layout-button">
+                <Button
+                  variant="contained"
+                  className="layout-button"
+                  onClick={this.handleClickSubmit}
+                >
                   Přihlásit
                 </Button>
               </Grid>
