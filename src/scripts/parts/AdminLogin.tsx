@@ -1,63 +1,69 @@
-import * as React from "react";
-import { withStyle } from "@material-ui/core/styles";
-import classNames from "classnames";
+import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
-import Input from "@material-ui/core/Input";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import InputAdornment from "@material-ui/core/InputAdornments";
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
 
-import IconButton from "@material-ui/core/IconButton";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
-const styles = theme => ({
+const styles = {
   root: {
-    flexGrow: 1
+    display: 'flex',
   },
-
-  grow: {
-    flexGrow: 1
-  },
-
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  }
-});
+    flexBasis: 200,
+  },
+};
+
 
 class AdminLogin extends React.Component {
-  state = {
-    password: "",
-    showPassword = false
-  };
+	props: any;
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value })
+  state = {
+    password: '',
+    showPassword: false
+  }
+
+
+  handleChangePassword = (event: any) => {
+    this.state.password = event.target.value;
   };
 
   handleClickShowPassword = () => {
-    this.setState(state => { showPassword: !state.showPassword });
+    this.state.showPassword = !this.state.showPassword;
   };
-
 
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <form className={classes.grow}>
-          <FormControl className={classNames(classes.margin, classes.textField)}>
-            <InputLabel htmlFor="adminPasswordField">Heslo</InputLabel>
-            <Input
-              id="adminPasswordField"
-              type={this.state.showPassword ? "text" : "password"}
-              value={this.state.password}
-            />
-          </FormControl>
-        </form>
+        <FormControl className={classes.textField}>
+          <InputLabel htmlFor="passwordField">Heslo</InputLabel>
+          <Input
+            id="passwordField"
+            type={this.state.showPassword ? 'text' : 'password'}
+            value={this.state.password}
+            onChange={this.handleChangePassword}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Přepnout viditelnost hesla"
+                  onClick={this.handleClickShowPassword}
+                >
+                  {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
       </div>
     );
   }

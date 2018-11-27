@@ -5,7 +5,9 @@ import Navigation from "./parts/Navigation";
 import AdminLogin from "./parts/AdminLogin";
 
 ReactDOM.render(
-	<Navigation/>,
-	<AdminLogin/>,
+	<div>
+		<Navigation/>
+		<AdminLogin/>
+	</div>,
 	document.getElementById("example")
 );
