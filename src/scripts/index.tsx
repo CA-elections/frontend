@@ -1,13 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { HashRouter } from 'react-router-dom';
 
-import Navigation from "./components/Navigation";
-import Frontpage from "./pages/Frontpage";
+import Routes from "./routes";
 
 ReactDOM.render(
-<div>
-			<Navigation/>
-			<Frontpage/>
-		</div>,
+	<HashRouter>
+		<Routes/>
+	</HashRouter>,
 	document.getElementById("example")
 );
