@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import Navigation from "./parts/Navigation";
 import AdminLogin from "./parts/AdminLogin";
+import LoadingBox from "./parts/LoadingBox";
 
 
 function handleSubmitPassword(password: string) {
