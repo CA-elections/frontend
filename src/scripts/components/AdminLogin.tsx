@@ -22,10 +22,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default class AdminLogin extends React.Component {
   static propTypes = {
-    onSubmit: PropTypes.object.isRequired,
-    passwordInvalid: PropTypes.object.isRequired,
-    lastPassword: PropTypes.object.isRequired,
-    lastShowPassword: PropTypes.object.isRequired
+    onSubmit: PropTypes.object.isRequired
   };
 
   props: any;
