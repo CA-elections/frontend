@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -25,15 +26,22 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default class AdminLogin extends React.Component {
   static propTypes = {
-    onSubmit: PropTypes.object.isRequired
+    onSubmit: PropTypes.object.isRequired,
+    passwordInvalid: PropTypes.object.isRequired,
+    lastPassword: PropTypes.object.isRequired,
+    lastShowPassword: PropTypes.object.isRequired
   };
+
   props: any;
 
   state = {
     password: '',
+    showPassword: false,
+
     error: false,
     errorText: '',
-    showPassword: false
+
+    accepted: false,
   }
 
   handleChangePassword = (event: any) => {
@@ -49,7 +57,15 @@ export default class AdminLogin extends React.Component {
       this.setState({ error: true, errorText: 'Vyplňte heslo' });
 
     } else {
-      this.props.onSubmit(this.state.password);
+      let valid = this.props.onSubmit(this.state.password);
+
+      if (valid) {
+        this.setState({ accepted: true, error: false });
+        // TODO: Route to some loading page.
+      
+      } else {
+        this.setState({ error: true, errorText: 'Neplatné heslo' });
+      }
     }
   };
 
@@ -102,6 +118,9 @@ export default class AdminLogin extends React.Component {
                     }
                   />
                 </FormControl>
+                { this.state.error &&
+                  <FormHelperText>{this.state.errorText}</FormHelperText>
+                }
               </Grid>
 
               <Grid item md="auto">
