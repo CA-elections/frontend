@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { HashRouter } from 'react-router-dom';
 
+/*
 import Navigation from "./parts/Navigation";
 import AdminLogin from "./parts/AdminLogin";
 
@@ -22,3 +24,13 @@ function reactRenderDOM() {
 }
 
 reactRenderDOM();
+
+import Routes from "./routes";
+
+ReactDOM.render(
+	<HashRouter>
+		<Routes/>
+	</HashRouter>,
+	document.getElementById("example")
+);
+*/
