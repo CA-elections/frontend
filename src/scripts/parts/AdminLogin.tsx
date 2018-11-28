@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import * as PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
@@ -15,9 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -62,7 +58,7 @@ export default class AdminLogin extends React.Component {
       if (valid) {
         this.setState({ accepted: true, error: false });
         // TODO: Route to some loading page.
-      
+
       } else {
         this.setState({ error: true, errorText: 'Neplatné heslo' });
       }
