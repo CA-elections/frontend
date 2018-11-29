@@ -5,7 +5,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from "@material-ui/core/typography";
+import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import Button from "@material-ui/core/Button/Button";
 
@@ -20,7 +20,8 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 		candidates: Array(),
 		name: "",
 		desc: "",
-		votes: Array()
+		votes: Array(),
+		votingConfirm: false,
 	};
 
 	constructor(props: ElectionVotingProps) {
@@ -28,6 +29,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 
 		this.fetchCodeData()
 		this.addVote = this.addVote.bind(this)
+		this.sendVote = this.sendVote.bind(this)
 		this.removeVote = this.removeVote.bind(this)
 	}
 
@@ -66,6 +68,12 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 
 		this.setState({ votes: result })
 		console.log(this.state.votes)
+	}
+
+	sendVote() {
+		fetch('http://hmmmm.magnusi.tech/api/vote/' + this.props.match.params.token + '/', { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
+			.then((d) => alert("hlasování bylo úspěšné"))
+			.catch(() => alert("nepodařilo se odeslat hlasy"));
 	}
 
 	render() {
@@ -115,6 +123,25 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 						</ExpansionPanelDetails>
 					</ExpansionPanel>
 				)}
+				<div className="layout-button-wrapper" style={{ 'paddingTop': "10px" }}>
+				{( !this.state.votingConfirm
+					?
+						<Button variant="contained" className="layout-button-btn" onClick={ () => this.setState({ votingConfirm: true }) }>
+							Odeslat hlasy
+						</Button>
+					:
+						(
+							<div>
+							<Button variant="contained" className="layout-button-btn" onClick={ () => this.sendVote() }>
+								Opravdu?
+							</Button>
+							<Button variant="contained" className="layout-button-btn" onClick={ () => this.setState({ votingConfirm: false }) }>
+								Zrušit
+							</Button>
+							</div>
+						)
+				)}
+				</div>
 			</Layout>
 		)
 	}
