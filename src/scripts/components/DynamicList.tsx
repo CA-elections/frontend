@@ -21,7 +21,7 @@ const styles = (theme: any) => ({
 		fontSize: theme.typography.pxToRem(15),
 		color: theme.palette.text.secondary,
 		'margin-left': 'auto',
-    'align-self': 'center'
+    	'align-self': 'center'
 	}
 });
 
