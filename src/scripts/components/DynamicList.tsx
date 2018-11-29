@@ -47,7 +47,7 @@ class DynamicList extends React.Component {
 
         className={classNames('layout-grid-content', 'layout-container')}
       >
-        <Paper>
+        <Paper className="layout-container">
           <div
 
             className={classNames('layout-grid-inner')}

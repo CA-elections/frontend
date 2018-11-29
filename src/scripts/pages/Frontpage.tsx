@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -26,8 +27,8 @@ const styles = (theme: any) => ({
 class Frontpage extends React.Component {
 	props: any;
 
-	handleShowElectionDetails = (electionId: any) => {
-		alert(electionId);
+	handleShowElectionDetails = (id: any) => {
+		this.setState({ showDetail: true, electionId: id });
 	};
 
 	updateStateWithData = (data: any) => {
@@ -40,19 +41,20 @@ class Frontpage extends React.Component {
   };
 
   processElections = (elections: any) => {
-    let a = elections.map((election: any, i: any) => (
-			<ElectionExpandPanel
-				electionId={election.id}
+    let a = elections.map((election: any, i: any) => {
+			//alert(Date.parse(election.date_start) <= Date.now() && Date.now() <= Date.parse(election.date_end) ? 'progress' : null);
+			return (<ElectionExpandPanel
+				key={election.id}
+				electionId={election.id.toString()}
 				electionStart={date_to_string(election.date_start)}
 				electionEnd={date_to_string(election.date_end)}
 
 				callback={this.handleShowElectionDetails}
 
-				{ ...election.is_student ? 'student' : null }
-				{ ...Date.parse(election.date_start) <= Date.now() && Date.now() <= Date.parse(election.date_end) ? 'progress' : null }
-				adultDeputy={ election.is_student ? election }
-			/>
-		));
+				student={ election.is_student}
+				progress={ Date.parse(election.date_start) <= Date.now() && Date.now() <= Date.parse(election.date_end) }
+			/>);
+		});
 
 		return a;
   };
@@ -61,8 +63,8 @@ class Frontpage extends React.Component {
     this.updateStateWithData([
 			{
 				'id': 1,
-				'date_start': '2001-01-01T00:00',
-				'date_end': '2002-02-02T00:00',
+				'date_start': '2018-01-01T00:00',
+				'date_end': '2019-02-02T00:00',
 				'is_student': true,
 			},
 		]);
@@ -90,6 +92,8 @@ class Frontpage extends React.Component {
 	state = {
 		elections: [] as Element[],
 		empty: true,
+		showDetail: false,
+		electionId: ''
 	};
 
 	constructor(props: any) {
@@ -102,8 +106,14 @@ class Frontpage extends React.Component {
 	render() {
 		const classes = this.props.classes;
 
+		if (this.state.showDetail) {
+			return (
+				<Redirect to={'/detail/' + this.state.electionId}/>
+			);
+		}
+
 		return (
-			<Layout>
+			<Layout title="Přehled">
 				<div className={classes.root}>
 						{this.state.elections}
 				</div>

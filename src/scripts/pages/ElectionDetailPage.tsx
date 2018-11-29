@@ -98,7 +98,7 @@ export default class extends React.Component {
 
   fetchData = () => {
     // TODO: this.props.match.params.token
-    alert(this.props.match.params.id);
+
     fetch('http://hmmmm.magnusi.tech/api/election/'
       + this.props.match.params.id,
 			{
@@ -112,7 +112,7 @@ export default class extends React.Component {
     .then(data => {
       this.updateStateWithData(data);
     }).catch((e: any) => {
-      this._updateWithDummyData();
+      // TODO: Error
     });
   };
 
@@ -137,7 +137,7 @@ export default class extends React.Component {
 
   render() {
   	return (
-  		<Layout>
+  		<Layout title="Detail voleb">
         <div className="layout-grid-content">
           <DynamicList
             detail

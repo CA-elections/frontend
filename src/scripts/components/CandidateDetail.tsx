@@ -60,10 +60,14 @@ class ElectionExpandPanel extends React.Component {
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          <div
+          <Grid
+            container
+            alignItems="flex-start"
+            justify="flex-start"
 
             className={classNames('layout-grid-inner', 'layout-container')}
           >
+            <Grid item md={12}>
             <Typography variant="caption">
               {
                 this.props.student
@@ -73,13 +77,25 @@ class ElectionExpandPanel extends React.Component {
                 'Dospělý'
               }
             </Typography>
+            </Grid>
 
-            <Typography variant="body2">{this.props.annotation}</Typography>
-          </div>
+            <Grid item md={6} className="layout-grid-inner">
+            <Typography variant="body2">
+              {this.props.annotation}
+            </Typography>
+            </Grid>
+
+            <Grid item>
+            <Typography variant="h4">
+              {this.props.percent}
+            </Typography>
+            </Grid>
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
   }
 }
+
 
 export default withStyles(styles)(ElectionExpandPanel);
