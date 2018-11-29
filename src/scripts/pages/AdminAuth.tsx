@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 
 export default class extends React.Component {
 	state = {
+		fetchInProgress: true,
 		errorMsg: '',
 		token: '',
 	};
@@ -29,14 +30,14 @@ export default class extends React.Component {
 			.then(data => {
 				alert(data);
 				if (data.token) {
-					this.setState({ token: data.token });
+					this.setState({ token: data.token, fetchInProgress: false });
 
 				} else {
-					this.setState({ errorMsg: 'Neplatné heslo' });
+					this.setState({ errorMsg: 'Neplatné heslo', fetchInProgress: false });
 				}
 			})
 			.catch(() => {
-				this.setState({ errorMsg: 'Chyba při komunikaci se serverem' });
+				this.setState({ errorMsg: 'Chyba při komunikaci se serverem', fetchInProgress: false });
 			});
 	}
 

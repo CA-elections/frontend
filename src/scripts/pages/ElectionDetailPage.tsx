@@ -36,12 +36,13 @@ export default class extends React.Component {
   processCandidates = (candidates: any) => {
     let total = candidates.reduce((x: any, y: any) => x.votes + y.votes);
 
-    let a = candidates.map((x: any) => (
+    let a = candidates.map((x: any, i: any) => (
       <CandidateDetail
         { ...this.state.isStudent && 'student' }
         name={x.name + ' ' + x.surname}
         annotation={x.annotation}
         percent={x.votes / total}
+        key={i}
       />
     ));
 
@@ -94,6 +95,8 @@ export default class extends React.Component {
   };
 
   fetchData = () => {
+    // TODO: this.props.match.params.token
+
     fetch('http://127.0.0.1:8000/api/election/'
       + this.props.match.params.id,
 			{
@@ -145,7 +148,7 @@ export default class extends React.Component {
           alignItems="center"
           justify="center"
 
-          className="layout-content-grid"
+          className="layout-grid-content"
         >
   				<ElectionDetailPanel
             electionStart={this.state.electionStart}

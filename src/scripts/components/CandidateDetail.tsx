@@ -40,7 +40,7 @@ class ElectionExpandPanel extends React.Component {
     name: PropTypes.string.isRequired,
     annotation: PropTypes.string.isRequired,
 
-    student: PropTypes.bool.isRequired,
+    student: PropTypes.bool,
     percent: PropTypes.number.isRequired,
     votes: PropTypes.number,
   };
@@ -64,12 +64,12 @@ class ElectionExpandPanel extends React.Component {
             container
             spacing={24}
             direction="column"
-            alignItems="center"
-            justify="center"
+            alignItems="flex-start"
+            justify="flex-start"
 
             className="layout-grid-inner"
           >
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <Typography variant="caption">
                   {
                     this.props.student
@@ -80,6 +80,7 @@ class ElectionExpandPanel extends React.Component {
                   }
                 </Typography>
               </Grid>
+
               <Grid item md={12}>
                 <Typography variant="body2">{this.props.annotation}</Typography>
               </Grid>
