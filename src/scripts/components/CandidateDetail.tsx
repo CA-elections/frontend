@@ -54,18 +54,9 @@ class ElectionExpandPanel extends React.Component {
     const classes = this.props.classes;
 
     return (
-      <ExpansionPanel className={
-        classNames('component-election-panel', {
-          'in-progress': this.props.progress,
-        })
-      }>
+      <ExpansionPanel className="component-candidate-panel">
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-          <Icon>account_balance</Icon>
-
-          <Typography className={classes.heading}>Volba do školské rady</Typography>
-          <Typography className={classes.secondaryHeading}>
-            {this.props.electionStart} - {this.props.electionEnd}
-          </Typography>
+          <Typography className={classes.heading}>{this.props.name}</Typography>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
@@ -78,19 +69,6 @@ class ElectionExpandPanel extends React.Component {
 
             className="layout-grid-inner"
           >
-            <Grid item md="auto">
-              <Typography variant="h6">{this.props.name}</Typography>
-            </Grid>
-
-            <Grid
-              container
-              spacing={24}
-              direction="row"
-              alignItems="center"
-              justify="flex-start"
-
-              className="layout-grid-inner"
-            >
               <Grid item xs={6}>
                 <Typography variant="caption">
                   {
@@ -105,7 +83,6 @@ class ElectionExpandPanel extends React.Component {
               <Grid item md={12}>
                 <Typography variant="body2">{this.props.annotation}</Typography>
               </Grid>
-            </Grid>
           </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
