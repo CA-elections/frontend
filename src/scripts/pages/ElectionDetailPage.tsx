@@ -1,8 +1,10 @@
-import * as React from "react";
-import Layout from "../layout";
+import * as React from 'react';
+import Layout from '../layout';
 
 import Grid from '@material-ui/core/Grid';
-import ElectionDetailPanel from "../components/ElectionDetailPanel";
+
+import CandidateDetail from '../components/CandidateDetail';
+import ElectionDetailPanel from '../components/ElectionDetailPanel';
 
 
 export default class extends React.Component {
@@ -34,17 +36,16 @@ export default class extends React.Component {
   processCandidates = (candidates: any) => {
     let total = candidates.reduce((x: any, y: any) => x.votes + y.votes);
 
-    let a = candidates.map((x: any) => ({
-      id: x.id,
+    let a = candidates.map((x: any) => (
+      <CandidateDetail
+        { ...this.state.isStudent && 'student' }
+        name={x.name + ' ' + x.surname}
+        annotation={x.annotation}
+        percent={x.votes / total}
+      />
+    ));
 
-      name: x.name,
-      surname: x.surname,
-
-      annotation: x.annotation,
-      votes: x.votes / total
-    }));
-
-    return candidates;
+    return a;
   };
 
   _updateWithDummyData = () => {
@@ -94,13 +95,22 @@ export default class extends React.Component {
 
   fetchData = () => {
     fetch('http://127.0.0.1:8000/api/election/'
-      + this.props.match.params.id)
+      + this.props.match.params.id,
+			{
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': 'http://localhost:8000/',
+				},
+        credentials: 'include',
+				method: 'GET',
+			}
+    )
 
     .then(response => response.json())
     .then(data => {
       this.updateStateWithData(data);
-    })
-    .catch(() => {
+    }).catch((e: any) => {
       this._updateWithDummyData();
     });
   };

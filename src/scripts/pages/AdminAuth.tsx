@@ -19,7 +19,7 @@ export default class extends React.Component {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': 'http://localhost:8000/'
+					'Access-Control-Allow-Origin': '*'
 				},
 				method: 'POST',
 				body: JSON.stringify({ username: 'admin', password: password })
@@ -34,6 +34,9 @@ export default class extends React.Component {
 				} else {
 					this.setState({ errorMsg: 'Neplatné heslo' });
 				}
+			})
+			.catch(() => {
+				this.setState({ errorMsg: 'Chyba při komunikaci se serverem' });
 			});
 	}
 

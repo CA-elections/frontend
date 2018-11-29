@@ -37,15 +37,12 @@ class ElectionExpandPanel extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
 
-    electionId: PropTypes.string.isRequired,
-    electionStart: PropTypes.string.isRequired,
-    electionEnd: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    annotation: PropTypes.string.isRequired,
 
-    callback: PropTypes.object.isRequired,
-
-    progress: PropTypes.bool.isRequired,
-    adultDeputy: PropTypes.string.isRequired,
-    studentDeputy: PropTypes.string.isRequired,
+    student: PropTypes.bool.isRequired,
+    percent: PropTypes.number.isRequired,
+    votes: PropTypes.number,
   };
   props: any;
 
@@ -82,7 +79,7 @@ class ElectionExpandPanel extends React.Component {
             className="layout-grid-inner"
           >
             <Grid item md="auto">
-              <Typography variant="h6">Zvolení zástupci</Typography>
+              <Typography variant="h6">{this.props.name}</Typography>
             </Grid>
 
             <Grid
@@ -96,59 +93,18 @@ class ElectionExpandPanel extends React.Component {
             >
               <Grid item xs={6}>
                 <Typography variant="caption">
-                  Zákonný zástupce
+                  {
+                    this.props.student
+                    ?
+                    'Zletilý student'
+                    :
+                    'Dospělý'
+                  }
                 </Typography>
               </Grid>
               <Grid item md={12}>
-                <Typography variant="h6">{this.props.adultDeputy}</Typography>
+                <Typography variant="body2">{this.props.annotation}</Typography>
               </Grid>
-            </Grid>
-
-            <Grid
-              container
-              spacing={24}
-              direction="row"
-              alignItems="center"
-              justify="flex-start"
-
-              className="layout-grid-inner"
-            >
-
-              <Grid item xs={6}>
-                <Typography variant="caption">
-                  Zletilý student
-                </Typography>
-              </Grid>
-              <Grid item md={12}>
-                <Typography variant="h6">{this.props.studentDeputy}</Typography>
-              </Grid>
-            </Grid>
-
-            <Grid item md="auto">
-              {
-                !this.props.progress
-                
-                ?
-
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={this.handleClickMoreButton.bind(this, this.props.electionId)}
-                >
-                  Zobrazit detail
-                </Button>
-
-                :
-
-                <Button
-                  disabled
-
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Volby právě probíhají
-                </Button>
-              }
             </Grid>
           </Grid>
         </ExpansionPanelDetails>

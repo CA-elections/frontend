@@ -57,11 +57,26 @@ class ElectionDetailPanel extends React.Component {
       >
         <Grid item md={6} className="layout-grid-wide">
         <Paper>
-          <div className="layout-grid-wide">
+          <Grid
+            container
+            spacing={16}
+            direction="column"
+            alignContent="center"
+            alignItems="center"
+            justify="center"
+
+            className="layout-grid-content"
+          >
+          <Grid item className="layout-grid-wide">
               <Typography className={classes.secondaryHeading}>
                 {this.props.electionStart} - {this.props.electionEnd}
               </Typography>
-          </div>
+          </Grid>
+
+          <Grid item className="layout-grid-wide">
+              {this.props.candidates}
+          </Grid>
+          </Grid>
         </Paper>
         </Grid>
       </Grid>
