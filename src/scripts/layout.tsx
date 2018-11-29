@@ -5,7 +5,7 @@ import Navigation from "./components/Navigation";
 export default function(props: any) {
 	return (
 		<div>
-			<Navigation/>
+			<Navigation back={props.back}/>
 			{props.children}
 		</div>
 	);

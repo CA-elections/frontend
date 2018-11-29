@@ -57,6 +57,7 @@ export default class AdminLogin extends React.Component {
       this.setState({ error: true, errorText: 'Vyplňte heslo' });
 
     } else {
+      this.state.error = false;
       this.props.onSubmit(this.state.password);
     }
   };
@@ -75,15 +76,16 @@ export default class AdminLogin extends React.Component {
       error: props.errorMsg !== '',
       errorText: props.errorMsg,
 
-      accepted: false,
+      accepted: this.props.token !== '',
       token: props.token,
     };
   }
 
   render() {
-    if (this.state.accepted) {
+    if (this.props.token) {
       return (
-        <Redirect to={'/load?dest=adminStat&token=' + this.state.token} />
+        // TODO: Redirect to overview with token
+        <Redirect to={'/front/' + this.props.token} />
       );
     }
 
@@ -102,7 +104,7 @@ export default class AdminLogin extends React.Component {
                 <FormControl className="text-field">
                   <InputLabel
                     htmlFor="passwordField"
-                    error={this.state.error}
+                    error={this.state.error || this.props.errorMsg}
                   >
                     Heslo
                   </InputLabel>
@@ -112,7 +114,7 @@ export default class AdminLogin extends React.Component {
                     type={this.state.showPassword ? 'text' : 'password'}
                     value={this.state.password}
                     onChange={this.handleChangePassword}
-                    error={this.state.error}
+                    error={this.state.error || this.props.errorMsg}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -125,8 +127,12 @@ export default class AdminLogin extends React.Component {
                     }
                   />
                 </FormControl>
-                { this.state.error &&
+                { (this.state.error) &&
                   <FormHelperText>{this.state.errorText}</FormHelperText>
+                }
+                {
+                  (this.props.errorMsg && !this.state.error) &&
+                  <FormHelperText>{this.props.errorMsg}</FormHelperText>
                 }
               </Grid>
 

@@ -52,17 +52,17 @@ class DynamicList extends React.Component {
 
             className={classNames('layout-grid-inner')}
           >
-              {
-                this.props.detail
-                ?
-                <Typography className={classes.secondaryHeading}>
-                  {this.props.electionStart} - {this.props.electionEnd}
-                </Typography>
-                :
-                null
-              }
+            {
+              this.props.detail
+              ?
+              <Typography className={classes.secondaryHeading}>
+                {this.props.electionStart} - {this.props.electionEnd}
+              </Typography>
+              :
+              null
+            }
 
-              {this.props.children}
+            {this.props.children}
           </div>
         </Paper>
       </div>

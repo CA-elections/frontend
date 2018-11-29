@@ -71,33 +71,41 @@ class Frontpage extends React.Component {
   };
 
   fetchData = () => {
-    // TODO: this.props.match.params.token
-
     fetch('http://hmmmm.magnusi.tech/api/election',
-			{
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-    )
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+	    )
 
-    .then(response => response.json())
-    .then(data => {
-      this.updateStateWithData(data);
-    }).catch((e: any) => {
-      this._updateWithDummyData();
-    });
+	    .then(response => response.json())
+	    .then(data => {
+	      this.updateStateWithData(data);
+	    }).catch((e: any) => {
+	      //this._updateWithDummyData();
+				// TODO: Error
+	    });
   };
 
 	state = {
 		elections: [] as Element[],
 		empty: true,
 		showDetail: false,
-		electionId: ''
+		electionId: '',
+		token: ''
 	};
 
 	constructor(props: any) {
 		super(props);
+
+		this.state = {
+			elections: [] as Element[],
+			empty: true,
+			showDetail: false,
+			electionId: '',
+			token: this.props.match.params.token,
+		};
 
 		this.handleShowElectionDetails = this.handleShowElectionDetails.bind(this);
 		this.fetchData();
@@ -107,6 +115,12 @@ class Frontpage extends React.Component {
 		const classes = this.props.classes;
 
 		if (this.state.showDetail) {
+			if (this.state.token) {
+				return (
+					<Redirect to={'/detail/' + this.state.electionId + '/' + this.state.token}/>
+				);
+			}
+
 			return (
 				<Redirect to={'/detail/' + this.state.electionId}/>
 			);

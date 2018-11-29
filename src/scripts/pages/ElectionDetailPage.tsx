@@ -97,23 +97,43 @@ export default class extends React.Component {
   };
 
   fetchData = () => {
-    // TODO: this.props.match.params.token
+    this.state.token = this.props.match.params.token;
 
-    fetch('http://hmmmm.magnusi.tech/api/election/'
-      + this.props.match.params.id,
-			{
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-    )
+    if (token) {
+      fetch('http://hmmmm.magnusi.tech/api/election/'
+        + this.props.match.params.id,
+  			{
+  				headers: {
+  					'Content-Type': 'application/json',
+            'Authorization': 'Token ' + token,
+  				},
+  			}
+      )
 
-    .then(response => response.json())
-    .then(data => {
-      this.updateStateWithData(data);
-    }).catch((e: any) => {
-      // TODO: Error
-    });
+      .then(response => response.json())
+      .then(data => {
+        this.updateStateWithData(data);
+      }).catch((e: any) => {
+        // TODO: Error
+      });
+
+    } else {
+      fetch('http://hmmmm.magnusi.tech/api/election/'
+        + this.props.match.params.id,
+  			{
+  				headers: {
+  					'Content-Type': 'application/json',
+  				},
+  			}
+      )
+
+      .then(response => response.json())
+      .then(data => {
+        this.updateStateWithData(data);
+      }).catch((e: any) => {
+        // TODO: Error
+      });
+    }
   };
 
   constructor(props: any) {
@@ -126,6 +146,7 @@ export default class extends React.Component {
     this.state = {
       electionStart: '',
       electionEnd: '',
+      token: '',
 
       isStudent: false,
 
@@ -137,7 +158,7 @@ export default class extends React.Component {
 
   render() {
   	return (
-  		<Layout title="Detail voleb">
+  		<Layout title="Detail voleb" back={'/front/' + this.props.token}>
         <div className="layout-grid-content">
           <DynamicList
             detail

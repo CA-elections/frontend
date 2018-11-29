@@ -67,28 +67,28 @@ class ElectionExpandPanel extends React.Component {
 
             className={classNames('layout-grid-inner', 'layout-container')}
           >
-            <Grid item md={12}>
-            <Typography variant="caption">
-              {
-                this.props.student
-                ?
-                'Zletilý student'
-                :
-                'Dospělý'
-              }
-            </Typography>
+            <Grid item md={6}>
+              <Typography variant="caption">
+                {
+                  this.props.student
+                  ?
+                  'Zletilý student'
+                  :
+                  'Dospělý'
+                }
+              </Typography>
             </Grid>
 
-            <Grid item md={6} className="layout-grid-inner">
-            <Typography variant="body2">
-              {this.props.annotation}
-            </Typography>
+            <Grid item md={6}>
+              <Typography variant="h4">
+                {this.props.percent}
+              </Typography>
             </Grid>
 
-            <Grid item>
-            <Typography variant="h4">
-              {this.props.percent}
-            </Typography>
+            <Grid item md={12} className="layout-grid-inner">
+              <Typography variant="body2">
+                {this.props.annotation}
+              </Typography>
             </Grid>
           </Grid>
         </ExpansionPanelDetails>

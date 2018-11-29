@@ -21,12 +21,12 @@ export default class extends React.Component {
 					'Content-Type': 'application/json',
 				},
 				method: 'POST',
-				body: JSON.stringify({ username: 'admin', password: password })
+				body: JSON.stringify({ username: 'user', password: password })
 			}
 		)
 			.then(response => response.json())
 			.then(data => {
-				alert(data);
+				//alert(JSON.stringify(data));
 				if (data.token) {
 					this.setState({ token: data.token, fetchInProgress: false });
 
