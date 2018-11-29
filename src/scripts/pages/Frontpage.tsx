@@ -127,7 +127,7 @@ class Frontpage extends React.Component {
 		}
 
 		return (
-			<Layout title="Přehled">
+			<Layout title="Přehled" token={this.state.token}>
 				<div className={classes.root}>
 						{this.state.elections}
 				</div>

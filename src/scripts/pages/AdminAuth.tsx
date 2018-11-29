@@ -41,7 +41,7 @@ export default class extends React.Component {
 
 	render() {
 		return (
-			<Layout>
+			<Layout back="" token="###---###">
 	      <Grid
 	        container
 	        spacing={24}
