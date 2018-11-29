@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
+import { Redirect } from 'react-router-dom';
+
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
@@ -22,6 +24,9 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default class AdminLogin extends React.Component {
   static propTypes = {
+    errorMsg: PropTypes.string.isRequired,
+    token: PropTypes.string.isRequired,
+
     onSubmit: PropTypes.object.isRequired
   };
 
@@ -35,6 +40,7 @@ export default class AdminLogin extends React.Component {
     errorText: '',
 
     accepted: false,
+    token: '',
   }
 
   handleChangePassword = (event: any) => {
@@ -50,30 +56,37 @@ export default class AdminLogin extends React.Component {
       this.setState({ error: true, errorText: 'Vyplňte heslo' });
 
     } else {
-      let valid = this.props.onSubmit(this.state.password);
-
-      if (valid) {
-        this.setState({ accepted: true, error: false });
-        // TODO: Route to some loading page.
-
-      } else {
-        this.setState({ error: true, errorText: 'Neplatné heslo' });
-      }
+      this.props.onSubmit(this.state.password);
     }
   };
 
-  render() {
-    return (
-      <Grid
-        container
-        spacing={24}
-        direction="column"
-        alignContent="center"
-        alignItems="center"
-        justify="center"
+  constructor(props: any) {
+    super(props);
 
-        className="layout-content-grid"
-      >
+    this.handleClickSubmit = this.handleClickSubmit.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
+
+    this.state = {
+      password: '',
+      showPassword: false,
+
+      error: props.errorMsg !== '',
+      errorText: props.errorMsg,
+
+      accepted: false,
+      token: props.token,
+    };
+  }
+
+  render() {
+    if (this.state.accepted) {
+      return (
+        <Redirect to={'/load?dest=adminStat&token=' + this.state.token} />
+      );
+    }
+
+    return (
           <Paper>
             <Grid
               container
@@ -82,7 +95,7 @@ export default class AdminLogin extends React.Component {
               alignItems="center"
               justify="center"
 
-              className="layout-inner-grid"
+              className="layout-grid-inner"
             >
               <Grid item md="auto">
                 <FormControl className="text-field">
@@ -129,7 +142,6 @@ export default class AdminLogin extends React.Component {
             </Grid>
           </Paper>
 
-      </Grid>
     );
   }
 }
