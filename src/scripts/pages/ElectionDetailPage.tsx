@@ -25,7 +25,7 @@ export default class extends React.Component {
   updateStateWithData = (data: any) => {
     let start = date_to_string(data.date_start);
     let end = date_to_string(data.date_end);
-
+	console.log(data);
     this.setState({
       electionStart: start,
       electionEnd: end,
@@ -37,17 +37,15 @@ export default class extends React.Component {
   };
 
   processCandidates = (candidates: any) => {
-    let total = candidates.reduce((x: any, y: any) => x.votes + y.votes);
-
-    let a = candidates.map((x: any, i: any) => (
-      <CandidateDetail
+    let a = candidates.map((x: any, i: any) => {
+      return <CandidateDetail
         { ...this.state.isStudent && 'student' }
         name={x.name + ' ' + x.surname}
         annotation={x.annotation}
-        percent={x.votes / total}
+        percent={x.percentage}
         key={i}
-      />
-    ));
+      />;
+  	});
 
     return a;
   };

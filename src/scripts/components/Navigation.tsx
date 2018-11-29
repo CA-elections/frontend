@@ -31,11 +31,16 @@ class Navigation extends React.Component {
 
 	state = {
 		backPage: '',
+		forwardPage: '',
 	};
 
 	handleClickBack = () => {
 		//console.log(this.props.back);
 		this.setState({ backPage: this.props.back });
+	};
+
+	handleClickLogin = () => {
+		this.setState({ backPage: '/login' })
 	};
 
 	render() {
@@ -61,7 +66,13 @@ class Navigation extends React.Component {
 <<<<<<< HEAD
 =======
 							!this.props.token &&
-							<Button>
+							<Button
+								className="component-tool-right"
+								color="inherit"
+
+								onClick={this.handleClickLogin}
+							>
+								Přihlásit se
 							</Button>
 						}
 
@@ -69,14 +80,30 @@ class Navigation extends React.Component {
 >>>>>>> Navigation: Added back button
 							this.props.back &&
 
-							<IconButton
-								className="component-tool-right"
-								color="inherit"
+							(
+								this.props.token
 
-								onClick={this.handleClickBack}
-							>
-								<Icon>arrow_back</Icon>
-							</IconButton>
+								?
+
+								<IconButton
+									className="component-tool-right"
+									color="inherit"
+
+									onClick={this.handleClickBack}
+								>
+									<Icon>arrow_back</Icon>
+								</IconButton>
+
+								:
+
+								<IconButton
+									color="inherit"
+
+									onClick={this.handleClickBack}
+								>
+									<Icon>arrow_back</Icon>
+								</IconButton>
+							)
 						}
 					</Toolbar>
 				</AppBar>
