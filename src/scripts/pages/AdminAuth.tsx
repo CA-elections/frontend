@@ -18,9 +18,7 @@ export default class extends React.Component {
 		fetch('http://hmmmm.magnusi.tech/api/token-auth/',
 			{
 				headers: {
-					'Accept': 'application/json',
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
 				},
 				method: 'POST',
 				body: JSON.stringify({ username: 'admin', password: password })

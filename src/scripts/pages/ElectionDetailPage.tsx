@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Layout from '../layout';
 import DynamicList from '../components/DynamicList';
+import date_to_string from '../utils/date_to_string';
 import CandidateDetail from '../components/CandidateDetail';
 
 
@@ -21,8 +22,8 @@ export default class extends React.Component {
   };
 
   updateStateWithData = (data: any) => {
-    let start = data.date_start.split('T')[0].split('-').reverse().join('. ');
-    let end = data.date_end.split('T')[0].split('-').reverse().join('. ');
+    let start = date_to_string(data.date_start);
+    let end = date_to_string(data.date_end);
 
     this.setState({
       electionStart: start,

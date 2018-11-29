@@ -48,43 +48,29 @@ class DynamicList extends React.Component {
     const classes = this.props.classes;
 
     return (
-      <Grid
-        container
-        spacing={24}
-        alignContent="center"
-        alignItems="center"
-        justify="center"
+      <div
 
-        className={classNames('layout-grid-content', 'layout-grid-wide')}
+        className={classNames('layout-grid-content', 'layout-container')}
       >
-        <Paper className="layout-container">
-          <Grid
-            container
-            spacing={24}
-            direction="column"
-            alignItems="flex-start"
-            justify="flex-start"
+        <Paper>
+          <div
 
-            className={classNames('layout-grid')}
+            className={classNames('layout-grid-inner')}
           >
               {
                 this.props.detail
                 ?
-                <Grid item md={12}>
-                    <Typography className={classes.secondaryHeading}>
-                      {this.props.electionStart} - {this.props.electionEnd}
-                    </Typography>
-                </Grid>
+                <Typography className={classes.secondaryHeading}>
+                  {this.props.electionStart} - {this.props.electionEnd}
+                </Typography>
                 :
                 null
               }
 
-              <Grid item md={12}>
-                  {this.props.children}
-              </Grid>
-          </Grid>
+              {this.props.children}
+          </div>
         </Paper>
-      </Grid>
+      </div>
     );
   }
 }

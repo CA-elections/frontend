@@ -10,6 +10,8 @@ import classNames from 'classnames'
 import Button from "@material-ui/core/es/Button/Button";
 import Layout from "../layout";
 
+import DynamicList from '../components/DynamicList';
+import date_to_string from '../utils/date_to_string';
 import ElectionExpandPanel from '../components/ElectionExpandPanel';
 
 
@@ -29,11 +31,30 @@ class Frontpage extends React.Component {
 	};
 
 	updateStateWithData = (data: any) => {
-    // TODO
+    if (data === []) {
+			this.setState({ empty: true });
+
+		} else {
+			this.setState({ empty: false, elections: this.processElections(data) });
+		}
   };
 
   processElections = (elections: any) => {
-    // TODO
+    let a = elections.map((election: any, i: any) => (
+			<ElectionExpandPanel
+				electionId={election.id}
+				electionStart={date_to_string(election.date_start)}
+				electionEnd={date_to_string(election.date_end)}
+
+				callback={this.handleShowElectionDetails}
+
+				{ ...election.is_student ? 'student' : null }
+				{ ...Date.parse(election.date_start) <= Date.now() && Date.now() <= Date.parse(election.date_end) ? 'progress' : null }
+				adultDeputy={ election.is_student ? election }
+			/>
+		));
+
+		return a;
   };
 
   _updateWithDummyData = () => {
@@ -49,15 +70,12 @@ class Frontpage extends React.Component {
 
   fetchData = () => {
     // TODO: this.props.match.params.token
-		
-    fetch('http://hmmmm.magnusi.tech/api/election/'
-      + this.props.match.params.id,
+
+    fetch('http://hmmmm.magnusi.tech/api/election',
 			{
 				headers: {
 					'Content-Type': 'application/json',
 				},
-        credentials: 'include',
-				method: 'GET',
 			}
     )
 
@@ -70,7 +88,8 @@ class Frontpage extends React.Component {
   };
 
 	state = {
-		elections: [] as Element[]
+		elections: [] as Element[],
+		empty: true,
 	};
 
 	constructor(props: any) {
@@ -86,7 +105,7 @@ class Frontpage extends React.Component {
 		return (
 			<Layout>
 				<div className={classes.root}>
-					{this.state.elections}
+						{this.state.elections}
 				</div>
 			</Layout>
 		);
