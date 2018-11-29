@@ -7,11 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-import Icon from '@material-ui/core/Icon';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 const styles = (theme: any) => ({
@@ -35,7 +31,6 @@ class DynamicList extends React.Component {
     classes: PropTypes.object.isRequired,
 
     detail: PropTypes.bool,
-    election: PropTypes.bool,
 
     electionStart: PropTypes.string,
     electionEnd: PropTypes.string,
