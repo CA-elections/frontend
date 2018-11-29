@@ -15,7 +15,7 @@ export default class extends React.Component {
 	handleSubmitPassword = (password: string) => {
 		let token = '';
 
-		fetch('http://127.0.0.1:8000/api/token-auth/',
+		fetch('http://hmmmm.magnusi.tech/api/token-auth/',
 			{
 				headers: {
 					'Accept': 'application/json',

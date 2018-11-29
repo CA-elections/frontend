@@ -64,10 +64,10 @@ class ElectionExpandPanel extends React.Component {
             container
             spacing={24}
             direction="column"
-            alignItems="flex-start"
+            alignItems="center"
             justify="flex-start"
 
-            className="layout-grid-inner"
+            className={classNames('layout-grid-inner', 'layout-container')}
           >
               <Grid item xs={12}>
                 <Typography variant="caption">

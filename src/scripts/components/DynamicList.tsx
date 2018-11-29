@@ -34,7 +34,9 @@ class DynamicList extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
 
-    header: PropTypes.bool,
+    detail: PropTypes.bool,
+    election: PropTypes.bool,
+
     electionStart: PropTypes.string,
     electionEnd: PropTypes.string,
 
@@ -48,38 +50,36 @@ class DynamicList extends React.Component {
     return (
       <Grid
         container
-        spacing={16}
-        direction="column"
+        spacing={24}
         alignContent="center"
         alignItems="center"
         justify="center"
 
-        className="layout-grid-content"
+        className={classNames('layout-grid-content', 'layout-grid-wide')}
       >
-        <Paper>
+        <Paper className="layout-container">
           <Grid
             container
-            spacing={16}
+            spacing={24}
             direction="column"
-            alignContent="center"
-            alignItems="center"
-            justify="center"
+            alignItems="flex-start"
+            justify="flex-start"
 
-            className={classNames('layout-grid-content', 'layout-grid-wide')}
+            className={classNames('layout-grid')}
           >
-              <Grid item className={classNames('layout-grid-inner', 'layout-grid-wide')}>
-                {
-                  this.props.header
-                  ?
-                  <Typography className={classes.secondaryHeading}>
-                    {this.props.electionStart} - {this.props.electionEnd}
-                  </Typography>
-                  :
-                  null
-                }
-              </Grid>
+              {
+                this.props.detail
+                ?
+                <Grid item md={12}>
+                    <Typography className={classes.secondaryHeading}>
+                      {this.props.electionStart} - {this.props.electionEnd}
+                    </Typography>
+                </Grid>
+                :
+                null
+              }
 
-              <Grid item className={classNames('layout-grid-inner', 'layout-grid-wide')}>
+              <Grid item md={12}>
                   {this.props.children}
               </Grid>
           </Grid>

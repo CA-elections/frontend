@@ -1,10 +1,11 @@
 import * as React from 'react';
-import Layout from '../layout';
+import classNames from 'classnames';
 
 import Grid from '@material-ui/core/Grid';
 
+import Layout from '../layout';
+import DynamicList from '../components/DynamicList';
 import CandidateDetail from '../components/CandidateDetail';
-import ElectionDetailPanel from '../components/ElectionDetailPanel';
 
 
 export default class extends React.Component {
@@ -96,17 +97,13 @@ export default class extends React.Component {
 
   fetchData = () => {
     // TODO: this.props.match.params.token
-
-    fetch('http://127.0.0.1:8000/api/election/'
+    alert(this.props.match.params.id);
+    fetch('http://hmmmm.magnusi.tech/api/election/'
       + this.props.match.params.id,
 			{
 				headers: {
-					'Accept': 'application/json',
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': 'http://localhost:8000/',
 				},
-        credentials: 'include',
-				method: 'GET',
 			}
     )
 
@@ -140,23 +137,14 @@ export default class extends React.Component {
   render() {
   	return (
   		<Layout>
-        <Grid
-          container
-          spacing={24}
-          direction="column"
-          alignContent="center"
-          alignItems="center"
-          justify="center"
-
-          className="layout-grid-content"
-        >
-  				<ElectionDetailPanel
+        <div className="layout-grid-content">
+          <DynamicList
+            detail
             electionStart={this.state.electionStart}
             electionEnd={this.state.electionEnd}
-
-            candidates={this.state.candidates}
+            children={this.state.candidates}
           />
-  			</Grid>
+  			</div>
   		</Layout>
   	);
   }

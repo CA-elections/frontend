@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { Redirect } from 'react-router-dom';
 
@@ -87,7 +88,7 @@ export default class AdminLogin extends React.Component {
     }
 
     return (
-          <Paper>
+          <Paper className="layout-container">
             <Grid
               container
               spacing={24}
@@ -95,7 +96,7 @@ export default class AdminLogin extends React.Component {
               alignItems="center"
               justify="center"
 
-              className="layout-grid-inner"
+              className={classNames('layout-grid-inner', 'layout-container')}
             >
               <Grid item md="auto">
                 <FormControl className="text-field">
