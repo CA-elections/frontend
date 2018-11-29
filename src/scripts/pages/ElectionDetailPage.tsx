@@ -17,6 +17,7 @@ export default class extends React.Component {
     electionEnd: '',
 
     isStudent: false,
+    token: '',
 
     candidates: [] as object[]
   };
@@ -98,6 +99,7 @@ export default class extends React.Component {
 
   fetchData = () => {
     this.state.token = this.props.match.params.token;
+    let token = this.state.token;
 
     if (token) {
       fetch('http://hmmmm.magnusi.tech/api/election/'
@@ -158,7 +160,7 @@ export default class extends React.Component {
 
   render() {
   	return (
-  		<Layout title="Detail voleb" back={'/front/' + this.props.token}>
+  		<Layout title="Detail voleb" back={'/front/' + (this.props.token ? this.props.token : '')}>
         <div className="layout-grid-content">
           <DynamicList
             detail
