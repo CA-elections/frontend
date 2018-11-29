@@ -108,7 +108,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 									>
 										Odebrat hlas
 									</Button>
-
+									<p>{ this.state.votes.filter((x) => x === value.id).length }</p>
 									<Button
 										disabled={this.state.votes_available === this.state.votes.length}
 										variant="contained"
