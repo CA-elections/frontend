@@ -126,7 +126,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 							</Grid>
 						</ExpansionPanelDetails>
 					</ExpansionPanel>
-				)}
+				))}
 				<div className="layout-button-wrapper" style={{ 'paddingTop': "10px" }}>
 				{( !this.state.votingConfirm
 					?

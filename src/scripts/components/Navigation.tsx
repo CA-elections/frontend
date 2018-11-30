@@ -4,10 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
-<<<<<<< HEAD
-=======
 import Button from '@material-ui/core/Button';
->>>>>>> Navigation: Added back button
 import IconButton from '@material-ui/core/IconButton';
 import { Redirect } from 'react-router-dom';
 
@@ -63,7 +60,7 @@ class Navigation extends React.Component {
 						</Typography>
 
 						{
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 =======
 							!this.props.token &&
 							<Button
@@ -77,7 +74,7 @@ class Navigation extends React.Component {
 						}
 
 						{
->>>>>>> Navigation: Added back button
+>>>>>>> Navigation: Added back button*/
 							this.props.back &&
 
 							(
