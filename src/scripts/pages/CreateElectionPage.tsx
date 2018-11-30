@@ -8,6 +8,10 @@ import fetchTools from '../utils/fetchTools';
 export default class extends React.Component {
 	props: any;
 
+	state = {
+		back: false,
+	};
+
 	requestCreateElection = (elections: any) => {
 		console.log(JSON.stringify(elections));
 
@@ -25,6 +29,7 @@ export default class extends React.Component {
 		})
 		.then((data: any) => {
 			console.log('CreateElectionPage (`data`): ' + JSON.stringify(data));
+			this.setState({ back: true });
 		});
 	};
 
@@ -37,6 +42,10 @@ export default class extends React.Component {
 		}
 
 		console.log('CreateElectionPage (`from`): ' + from);
+
+		if (this.state.back) {
+			return <Redirect to={from}/>
+		}
 
 		return (
 			<Layout
