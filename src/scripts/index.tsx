@@ -5,6 +5,8 @@ import { HashRouter } from 'react-router-dom';
 
 import Routes from "./routes";
 
+console.log(process.env.URL);
+
 ReactDOM.render(
 	<HashRouter>
 		<Routes/>
