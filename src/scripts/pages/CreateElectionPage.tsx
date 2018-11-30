@@ -24,7 +24,7 @@ export default class extends React.Component {
 			return response.json();
 		})
 		.then((data: any) => {
-			console.log('CreateElectionPage (`data`): ' + data);
+			console.log('CreateElectionPage (`data`): ' + JSON.stringify(data));
 		});
 	};
 
