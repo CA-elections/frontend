@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import classNames from "classnames";
+import fetchTools from '../utils/fetchTools';
 
 import { Redirect } from "react-router-dom";
 
@@ -62,21 +63,21 @@ class Candidate extends React.Component {
 			<Grid>
 				<TextField
 					id="standard-name"
-					label="Name"
+					label="Jméno"
 					value={this.props.candidate.name}
 					onChange={this.onChange.name}
 					margin="normal"
 				/>
 				<TextField
 					id="standard-surname"
-					label="Surname"
+					label="Příjmení"
 					value={this.props.candidate.surname}
 					onChange={this.onChange.surname}
 					margin="normal"
 				/>
 				<TextField
 					id="standard-annotation"
-					label="Annotation"
+					label="Anotace"
 					value={this.props.candidate.annotation}
 					onChange={this.onChange.annotation}
 					margin="normal"
@@ -98,7 +99,7 @@ export default class CreateElection extends React.Component {
 
 	props: any;
 	state = {
-		candidates: [] as Element[],
+		candidates: [] as object[],
 		candidates_len: 0,
 		startingDate: "2012-12-12T12:12",
 		endDate: "2012-12-12T12:12",
@@ -162,20 +163,26 @@ export default class CreateElection extends React.Component {
 
 	handleClick = {
 		addCandidate: (e: any) => {
-		e.preventDefault();
-		this.setState(function(state: any) {
-			let new_candidates = state.candidates;
-			new_candidates[state.candidates_len] = {
-				name: "",
-				surname: "",
-				annotation: ""
-			};
-			return {
-				candidates: new_candidates,
-				candidates_len: state.candidates_len + 1
-			};
-		});
+			e.preventDefault();
+			this.setState(function(state: any) {
+				let new_candidates = state.candidates;
+				new_candidates[state.candidates_len] = {
+					name: "",
+					surname: "",
+					annotation: ""
+				};
+				return {
+					candidates: new_candidates,
+					candidates_len: state.candidates_len + 1
+				};
+			});
 		}
+	};
+
+	handleClickSubmit = () => {
+		//
+
+		this.props.onSubmit(this.state.candidates);
 	};
 
 	render() {
@@ -209,7 +216,7 @@ export default class CreateElection extends React.Component {
 						<FormControl>
 							<TextField
 								id="dateStartField"
-								label="Starting Date"
+								label="Datum začátku"
 								type="datetime-local"
 								value={this.state.startingDate}
 								onChange={this.onUpdate.startingDate}
@@ -219,7 +226,7 @@ export default class CreateElection extends React.Component {
 							/>
 							<TextField
 								id="dateEndField"
-								label="End Date"
+								label="Datum konce"
 								type="datetime-local"
 								value={this.state.endDate}
 								onChange={this.onUpdate.endDate}
@@ -238,7 +245,7 @@ export default class CreateElection extends React.Component {
 									checked={this.state.isStudent}
 								/>
 							}
-							label="Is Student"
+							label="Studentské"
 						/>
 					</Grid>
 
