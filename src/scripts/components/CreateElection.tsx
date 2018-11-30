@@ -101,8 +101,8 @@ export default class CreateElection extends React.Component {
 	state = {
 		candidates: [] as object[],
 		candidates_len: 0,
-		startingDate: "2012-12-12T12:12",
-		endDate: "2012-12-12T12:12",
+		date_start: "2012-12-12T12:12",
+		date_end: "2012-12-12T12:12",
 		isStudent: false,
 		name: "",
 		description: "",
@@ -116,8 +116,8 @@ export default class CreateElection extends React.Component {
 		this.state = {
 			candidates: [],
 			candidates_len: 0,
-			startingDate: "2012-12-12T12:12",
-			endDate: "2012-12-12T12:12",
+			date_start: "2012-12-12T12:12",
+			date_end: "2012-12-12T12:12",
 			isStudent: false,
 			name: "elections",
 			description: "",
@@ -182,7 +182,13 @@ export default class CreateElection extends React.Component {
 	handleClickSubmit = () => {
 		//
 
-		this.props.onSubmit(this.state.candidates);
+		this.props.onSubmit({
+			name: 'elections',
+			is_student: this.state.isStudent,
+			candidates: this.state.candidates,
+			date_start: this.state.date_start,
+			date_end: this.state.date_end,
+		});
 	};
 
 	render() {

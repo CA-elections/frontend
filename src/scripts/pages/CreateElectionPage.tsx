@@ -9,6 +9,8 @@ export default class extends React.Component {
 	props: any;
 
 	requestCreateElection = (elections: any) => {
+		console.log(JSON.stringify(elections));
+
 		fetch(fetchTools.call('election/special', true),
 		{
 			headers: {
