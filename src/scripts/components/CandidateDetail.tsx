@@ -83,7 +83,7 @@ class CandidateExpandPanel extends React.Component {
 						<Grid item md={6}>
 							<Typography variant="h4">
 								{
-									isNaN(this.props.percent) ?
+									isNaN(this.props.percent) || this.props.percent === undefined ?
 									'Nikdo nehlasoval'
 									: this.props.percent.toString() + ' %'
 								}

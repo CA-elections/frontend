@@ -93,19 +93,27 @@ class Frontpage extends React.Component {
 
 	checkTokenValid = () => {
 		let t = this.props.match.params.token;
+		let invalid = t === '###invalid';
 
-		if (t === '###invalid') {
-			this.state.invalidToken = true;
-			this.state.token = '';
+		console.log('Frontpage (`checkToken`): ' + (t === '###invalid').toString());
 
-			return false;
+		this.state.invalidToken = invalid;
+		this.state.token = !invalid && t ? t : '';
 
-		} else {
-			this.state.invalidToken = false;
-			this.state.token = t;
+		return !invalid;
 
-			return true;
-		}
+		// if (t === '###invalid') {
+		// 	this.state.invalidToken = true;
+		// 	this.state.token = '';
+		//
+		// 	return false;
+		//
+		// } else {
+		// 	this.state.invalidToken = false;
+		// 	this.state.token = t || '';
+		//
+		// 	return true;
+		// }
 	};
 
 	state = {
@@ -129,9 +137,10 @@ class Frontpage extends React.Component {
 			token: (this.props.match.params.token || ''),
 		};
 
-		console.log(this.props.match.params.token);
+		// console.log(this.props.match.params.token);
 
 		this.handleShowElectionDetails = this.handleShowElectionDetails.bind(this);
+		this.checkTokenValid = this.checkTokenValid.bind(this);
 		this.fetchData();
 	}
 
@@ -153,7 +162,7 @@ class Frontpage extends React.Component {
 		return (
 			<Layout
 				title="Přehled"
-				desc={this.checkTokenValid()}
+				desc={this.checkTokenValid() ? '' : 'Neplatný administrátorský token'}
 				token={this.state.token}
 				current={'front'}
 				back=""

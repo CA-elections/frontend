@@ -9,6 +9,8 @@ import DynamicList from '../components/DynamicList';
 import date_to_string from '../utils/date_to_string';
 import CandidateDetail from '../components/CandidateDetail';
 
+import fetchTools from '../utils/fetchTools';
+
 
 export default class extends React.Component {
 	props: any;
@@ -82,7 +84,7 @@ export default class extends React.Component {
 				name={x.name + ' ' + x.surname}
 				annotation={x.annotation}
 
-				percent={x.percentage}
+				percent={Math.round(x.percentage * 100)}
 				key={i}
 			/>;
 		});
@@ -109,7 +111,7 @@ export default class extends React.Component {
 				annotation={x.annotation}
 
 				votes={x.votes}
-				percent={x.votes / total}
+				percent={Math.round(100 * x.votes / total)}
 				key={i}
 			/>;
 		});
@@ -167,7 +169,7 @@ export default class extends React.Component {
 		let token = this.state.token;
 
 		if (token) {
-			fetch('http://hmmmm.magnusi.tech/api/admin/election/'
+			fetch(fetchTools.call('election', true)
 				+ this.props.match.params.id,
 				{
 					headers: {
@@ -184,7 +186,7 @@ export default class extends React.Component {
 			});
 
 		} else {
-			fetch('http://hmmmm.magnusi.tech/api/election/'
+			fetch(fetchTools.call('election', false)
 				+ this.props.match.params.id,
 				{
 					headers: {
