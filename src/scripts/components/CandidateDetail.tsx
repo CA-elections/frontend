@@ -28,66 +28,83 @@ const styles = (theme: any) => ({
 		fontSize: theme.typography.pxToRem(15),
 		color: theme.palette.text.secondary,
 		'margin-left': 'auto',
-    'align-self': 'center'
+    	'align-self': 'center'
 	}
 });
 
 
-class ElectionExpandPanel extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
+class CandidateExpandPanel extends React.Component {
+	static propTypes = {
+		classes: PropTypes.object.isRequired,
 
-    name: PropTypes.string.isRequired,
-    annotation: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		annotation: PropTypes.string.isRequired,
 
-    student: PropTypes.bool.isRequired,
-    percent: PropTypes.number.isRequired,
-    votes: PropTypes.number,
-  };
-  props: any;
+		admin: PropTypes.bool,
+		student: PropTypes.bool,
+		percent: PropTypes.number.isRequired,
+		votes: PropTypes.number,
+	};
+	props: any;
 
-  handleClickMoreButton = (id: any, event: any) => {
-    this.props.callback(id);
-  };
+	handleClickMoreButton = (id: any, event: any) => {
+		this.props.callback(id);
+	};
 
-  render() {
-    const classes = this.props.classes;
+	render() {
+		const classes = this.props.classes;
 
-    return (
-      <ExpansionPanel className="component-candidate-panel">
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-          <Typography className={classes.heading}>{this.props.name}</Typography>
-        </ExpansionPanelSummary>
+		return (
+			<ExpansionPanel className="component-candidate-panel">
+				<ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+					<Typography className={classes.heading}>{this.props.name}</Typography>
+				</ExpansionPanelSummary>
 
-        <ExpansionPanelDetails>
-          <Grid
-            container
-            spacing={24}
-            direction="column"
-            alignItems="center"
-            justify="center"
+				<ExpansionPanelDetails>
+					<Grid
+						container
+						alignItems="flex-start"
+						justify="flex-start"
 
-            className="layout-grid-inner"
-          >
-              <Grid item xs={6}>
-                <Typography variant="caption">
-                  {
-                    this.props.student
-                    ?
-                    'Zletilý student'
-                    :
-                    'Dospělý'
-                  }
-                </Typography>
-              </Grid>
-              <Grid item md={12}>
-                <Typography variant="body2">{this.props.annotation}</Typography>
-              </Grid>
-          </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    );
-  }
+						className={classNames('layout-grid-inner', 'layout-container')}
+					>
+						<Grid item md={12}>
+							<Typography variant="caption">
+								{
+									this.props.student
+									?
+									'Zletilý student'
+									:
+									'Dospělý'
+								}
+							</Typography>
+						</Grid>
+
+						<Grid item md={6}>
+							<Typography variant="h4">
+								{this.props.percent} %
+							</Typography>
+						</Grid>
+
+						{
+							<Grid item md={6}>
+								<Typography variant="h4">
+									{this.props.percent} hlasů
+								</Typography>
+							</Grid>
+						}
+
+						<Grid item md={12} className="layout-grid-inner">
+							<Typography variant="body2">
+								{this.props.annotation}
+							</Typography>
+						</Grid>
+					</Grid>
+				</ExpansionPanelDetails>
+			</ExpansionPanel>
+		);
+	}
 }
 
-export default withStyles(styles)(ElectionExpandPanel);
+
+export default withStyles(styles)(CandidateExpandPanel);

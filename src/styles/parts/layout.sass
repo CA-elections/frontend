@@ -1,34 +1,53 @@
 .layout
-  &-title
-    font-size: rem(40px)
-    text-transform: uppercase
-    text-align: center
+	&-wrapper
+		margin: 0 auto rem(40px)
+		text-align: center
+		width: 80%
 
-  &-list
-    margin: 0 auto
+	&-title
+		font-size: rem(40px)
+		text-transform: uppercase
+		font-family: Arial, sans-serif
+		margin-top: rem(40px)
 
-  &-grid
-    &-content
-      height: 80vh
-      width: 100vw
-      vertical-align: middle
+	&-desc
+		font-family: Arial, sans-serif
+		font-size: rem(16px)
+		margin-top: rem(20px)
 
-    &-wide
-      height: 60vh
-      width: 100vw
-      vertical-align: middle
+	&-votes
+		font-size: 30px
+		text-align: center
+		font-family: Arial, sans-serif
+		margin-bottom: rem(40px)
 
-      padding-top: 10px
-      padding-bottom: 15px
+	&-candidate
+		width: 80%
 
-      padding-left: 25px
-      padding-right: 25px
+	&-list
+		margin: 0 auto
 
-    &-inner
-      vertical-align: middle
+	&-grid
+		vertical-align: middle
+		margin-left: auto
+		margin-right: auto
 
-      padding-top: 10px
-      padding-bottom: 15px
+	&-content
+		height: 60vh
+		width: 80vw
 
-      padding-left: 25px
-      padding-right: 25px
+	&-inner
+		height: 100%
+		width: 80%
+		margin-top: rem(10px)
+
+	&-container
+		padding: 10px 25px 15px
+
+	&-button
+		&-wrapper
+			margin: rem(20px) 0
+			+flex(center, center)
+
+		&-btn
+			margin: 0 rem(5px) !important

@@ -1,25 +1,25 @@
 import * as React from 'react';
-import {Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+//import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Frontpage from "./pages/Frontpage";
 import AdminAuth from "./pages/AdminAuth";
 import ElectionDetailPage from './pages/ElectionDetailPage';
-import Layout from "./layout";
+import ElectionVoting from './pages/ElectionVoting';
+
 
 class RoutesView extends React.Component {
     render() {
         return (
             <Switch>
-                <Route exact path='/' render={() =>
-                    <Layout>
-                        <Frontpage
-                          elections={[]}
-                        />
-                    </Layout>} />
-                <Route exact path='/login' component={AdminAuth}/>
-                <Route exact path='/detail/:id' component={ElectionDetailPage}/>
+                <Route exact path='/' component={Frontpage}/>
+                <Route exact path='/front/:token?' component={Frontpage} />
+                <Route exact path='/login/:from' component={AdminAuth}/>
+				<Route exact path='/election-voting/:token' component={ElectionVoting}/>
+                <Route exact path='/detail/:id/:token?' component={ElectionDetailPage}/>
             </Switch>
         );
     }
 }
+
 
 export default RoutesView;

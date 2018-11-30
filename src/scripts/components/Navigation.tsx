@@ -1,8 +1,14 @@
 import * as React from "react";
+import * as PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import { Redirect } from 'react-router-dom';
+
 
 const styles = {
 	root: {
@@ -17,20 +23,99 @@ const styles = {
 	},
 };
 
-function Navigation(props: any) {
-	const { classes } = props;
-	return (
-		<div className={classes.root}>
-			<AppBar position="static">
-				<Toolbar>
-					<img src="./static/images/logo.png" alt="" className="menu-image"/>
-					<Typography variant="h6" color="inherit" className={classes.grow}>
-						Kepler - Hlasování
-					</Typography>
-				</Toolbar>
-			</AppBar>
-		</div>
-	);
+
+class Navigation extends React.Component {
+	static propTypes = {
+		back: PropTypes.string.isRequired,
+		current: PropTypes.string.isRequired,
+		token: PropTypes.string.isRequired,
+	};
+	props: any;
+
+	state = {
+		backPage: '',
+		forwardPage: '',
+	};
+
+	handleClickLogin = () => {
+		this.setState({ forwardPage: 'login/' + this.props.current.replace(/\//, '\\') });
+	};
+
+	handleClickBack = () => {
+		//console.log(this.props.back);
+		this.setState({ backPage: this.props.back });
+	};
+
+	constructor(props: any) {
+		super(props);
+
+		this.handleClickBack = this.handleClickBack.bind(this);
+		this.handleClickLogin = this.handleClickLogin.bind(this);
+
+		this.state = {
+			backPage: '',
+			forwardPage: '',
+		};
+	}
+
+	render() {
+		const classes = this.props.classes;
+
+		console.log('Navigation (`back`): ' + this.props.back);
+		console.log('Navigation (`backPage`): ' + this.state.backPage);
+		console.log('Navigation (`forwardPage`): ' + this.state.forwardPage);
+		console.log('Navigation (`current`): ' + this.props.current);
+
+		if (this.state.backPage) {
+			return (
+				<Redirect to={'/' + this.state.backPage.replace(/\\/, '/')}/>
+			);
+		} else if (this.state.forwardPage) {
+			return (
+				<Redirect to={'/' + this.state.forwardPage}/>
+			);
+		}
+
+		return (
+			<div className={classes.root}>
+				<AppBar position="static">
+					<Toolbar>
+						<img src="./static/images/logo.png" alt="" className="menu-image"/>
+
+						<Typography variant="h6" color="inherit" className={classes.grow}>
+							Kepler - Hlasování
+						</Typography>
+
+						{
+							(this.props.token === '' || this.props.token === undefined) &&
+							<Button
+								className="component-tool-right"
+								color="inherit"
+
+								onClick={this.handleClickLogin}
+							>
+								Přihlásit se
+							</Button>
+						}
+
+						{
+							this.props.back &&
+
+							<IconButton
+								className="component-tool-right"
+								color="inherit"
+
+								onClick={this.handleClickBack}
+							>
+								<Icon>arrow_back</Icon>
+							</IconButton>
+						}
+					</Toolbar>
+				</AppBar>
+			</div>
+		);
+	}
 }
+
 
 export default withStyles(styles)(Navigation);
