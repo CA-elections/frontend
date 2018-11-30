@@ -167,7 +167,7 @@ export default class CreateElection extends React.Component {
 
   render() {
     if (this.state.accepted) {
-      return <Redirect to={"/load?dest=adminStat&token=" + this.state.token} />;
+      return <Redirect to={"/front/" + this.state.token} />;
     }
 
     let candidateComponents = [];

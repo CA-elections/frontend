@@ -6,5 +6,5 @@ export default class fetchTools {
 	public static readonly election_name = 'election/';
 
 	public static readonly api_url = fetchTools.protocol + '://' + fetchTools.api_name;
-	public static readonly
+
 }
