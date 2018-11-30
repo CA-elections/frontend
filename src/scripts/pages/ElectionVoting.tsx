@@ -100,7 +100,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 
 							>
 								<Typography>
-									{value.annotation} Prosím tohle potom smazat, je to tu jenom protože sem nidko nedal žádnou anotaci
+									{value.annotation} Prosím tohle potom smazat, je to tu jenom protože sem nikdo nedal žádnou anotaci
 								</Typography>
 								<div className="layout-button-wrapper">
 									<Button
@@ -134,16 +134,14 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 							Odeslat hlasy
 						</Button>
 					:
-						(
-							<div>
+						(<div>
 							<Button variant="contained" className="layout-button-btn" onClick={ () => this.sendVote() }>
 								Opravdu?
 							</Button>
 							<Button variant="contained" className="layout-button-btn" onClick={ () => this.setState({ votingConfirm: false }) }>
 								Zrušit
 							</Button>
-							</div>
-						)
+						</div>)
 				)}
 				</div>
 			</Layout>
