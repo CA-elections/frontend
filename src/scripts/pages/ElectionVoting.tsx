@@ -1,5 +1,6 @@
 import * as React from "react";
 import Layout from "../layout";
+import { Redirect } from 'react-router-dom';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -24,6 +25,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 		desc: "",
 		votes: Array(),
 		votingConfirm: false,
+		back: false,
 	};
 
 	constructor(props: ElectionVotingProps) {
@@ -75,13 +77,18 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 		fetch(fetchTools.call('vote/' + this.props.match.params.token, false), { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
 			.then((d) => {
 				if (d.status >= 200 && d.status < 300)
-					alert("hlasování bylo úspěšné")
+					alert("Hlasování bylo úspěšné")
 				else
-					alert("nepodařilo se odeslat hlasy")
+					alert("Nepodařilo se odeslat hlasy")
+				this.setState({ back: true });
 			});
 	}
 
 	render() {
+		if (this.state.back) {
+			return <Redirect to="/front"/>
+		}
+
 		return (
 			<Layout title={this.state.name} desc={this.state.desc}>
 				<h2 className="layout-votes">Hlasů: {this.state.votes_available - this.state.votes.length}</h2>
