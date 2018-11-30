@@ -81,12 +81,15 @@ export default class AdminLogin extends React.Component {
 	}
 
 	render() {
-		console.log('AdminLogin (`token`): ' + this.props.token);
-		console.log('AdminLogin (`from`): ' + this.props.from);
+		let token = this.props.token || '';
+		let from = this.props.from.replace(/\\/, '/');
 
-		if (this.props.token) {
+		console.log('AdminLogin (`token`): ' + token);
+		console.log('AdminLogin (`from`): ' + from);
+
+		if (token) {
 			return (
-				<Redirect to={'/' + this.props.from + '/' + this.props.token} />
+				<Redirect to={'/' + from + '/' + token} />
 			);
 		}
 

@@ -27,18 +27,19 @@ export default class extends React.Component {
 	};
 
 	render() {
-		let token = this.props.match.params.token;
+		let token = this.props.match.params.token || '';
 		let from = this.props.match.params.from.replace(/\//, '\\');
 
 		if (!token) {
 			return <Redirect to="/front"/>
 		}
+
 		console.log('CreateElectionPage (`from`): ' + from);
 		return (
 			<Layout
 				title='Vytvořit volby'
 				token={token}
-				back={from + '/' + token}
+				back={from + '\\' + token}
 				current={'create-election/' + token}
 			>
 				<CreateElection
