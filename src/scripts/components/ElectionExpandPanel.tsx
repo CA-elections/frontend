@@ -34,91 +34,91 @@ const styles = (theme: any) => ({
 
 
 class ElectionExpandPanel extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
+	static propTypes = {
+		classes: PropTypes.object.isRequired,
 
-    electionId: PropTypes.string.isRequired,
-    electionStart: PropTypes.string.isRequired,
-    electionEnd: PropTypes.string.isRequired,
+		electionId: PropTypes.string.isRequired,
+		electionStart: PropTypes.string.isRequired,
+		electionEnd: PropTypes.string.isRequired,
 
-    callback: PropTypes.func.isRequired,
+		callback: PropTypes.func.isRequired,
 
-    progress: PropTypes.bool,
+		progress: PropTypes.bool,
 		student: PropTypes.bool,
-  };
-  props: any;
+	};
+	props: any;
 
-  handleClickMoreButton = (id: any, event: any) => {
-    this.props.callback(id);
-  };
+	handleClickMoreButton = (id: any, event: any) => {
+		this.props.callback(id);
+	};
 
-  render() {
-    const classes = this.props.classes;
+	render() {
+		const classes = this.props.classes;
 
-    return (
-      <ExpansionPanel className={
-        classNames('component-election-panel', {
-          'in-progress': this.props.progress,
-        })
-      }>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-          <Icon>account_balance</Icon>
+		return (
+			<ExpansionPanel className={
+				classNames('component-election-panel', {
+					'in-progress': this.props.progress,
+				})
+				}>
+				<ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+					<Icon>account_balance</Icon>
 
-          <Typography className={classes.heading}>
+					<Typography className={classes.heading}>
 						Volba do školské rady - {
-							this.props.student
-							?
+						this.props.student
+						?
 
-							'Studenti'
-							:
-							'Zákonní zástupci'
+						'Studenti'
+						:
+						'Zákonní zástupci'
 						}
 					</Typography>
-          <Typography className={classes.secondaryHeading}>
-            {this.props.electionStart} - {this.props.electionEnd}
-          </Typography>
-        </ExpansionPanelSummary>
+					<Typography className={classes.secondaryHeading}>
+						{this.props.electionStart} - {this.props.electionEnd}
+					</Typography>
+				</ExpansionPanelSummary>
 
-        <ExpansionPanelDetails>
-          <Grid
-            container
-            spacing={24}
-            direction="column"
-            alignItems="center"
-            justify="center"
+				<ExpansionPanelDetails>
+					<Grid
+						container
+						spacing={24}
+						direction="column"
+						alignItems="center"
+						justify="center"
 
-            className="layout-grid-inner"
-          >
-            <Grid item md="auto">
-              {
-                !this.props.progress
-                ?
+						className="layout-grid-inner"
+					>
+						<Grid item md="auto">
+							{
+								!this.props.progress
+								?
 
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={this.handleClickMoreButton.bind(this, this.props.electionId)}
-                >
-                  Zobrazit detail
-                </Button>
+								<Button
+									variant="outlined"
+									color="secondary"
+									onClick={this.handleClickMoreButton.bind(this, this.props.electionId)}
+								>
+									Zobrazit detail
+								</Button>
 
-                :
+								:
 
-                <Button
-                  disabled
+								<Button
+									disabled
 
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Volby právě probíhají
-                </Button>
-              }
-            </Grid>
-          </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    );
-  }
+									variant="outlined"
+									color="secondary"
+								>
+									Volby právě probíhají
+								</Button>
+							}
+						</Grid>
+					</Grid>
+				</ExpansionPanelDetails>
+			</ExpansionPanel>
+		);
+	}
 }
 
 export default withStyles(styles)(ElectionExpandPanel);

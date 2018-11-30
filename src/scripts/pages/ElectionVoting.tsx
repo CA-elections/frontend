@@ -18,7 +18,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 			name: "Hlasování",
 			desc: "Tohle je to nejlepší hlasování ever."
 		},
-		candidates: [],
+		candidates: [] as Element[],
 	};
 
 	constructor(props: ElectionVotingProps) {
@@ -52,7 +52,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 							</Typography>
 						</ExpansionPanelDetails>
 					</ExpansionPanel>
-				)}
+				))}
 			</Layout>
 		)
 	}

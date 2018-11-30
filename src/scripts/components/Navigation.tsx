@@ -1,13 +1,11 @@
 import * as React from "react";
+import * as PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
-<<<<<<< HEAD
-=======
 import Button from '@material-ui/core/Button';
->>>>>>> Navigation: Added back button
 import IconButton from '@material-ui/core/IconButton';
 import { Redirect } from 'react-router-dom';
 
@@ -27,6 +25,11 @@ const styles = {
 
 
 class Navigation extends React.Component {
+	static propTypes = {
+		back: PropTypes.string.isRequired,
+		current: PropTypes.string.isRequired,
+		token: PropTypes.string.isRequired,
+	};
 	props: any;
 
 	state = {
@@ -34,21 +37,42 @@ class Navigation extends React.Component {
 		forwardPage: '',
 	};
 
+	handleClickLogin = () => {
+		this.setState({ forwardPage: 'login/' + this.props.current.replace(/\//, '\\') });
+	};
+
 	handleClickBack = () => {
 		//console.log(this.props.back);
 		this.setState({ backPage: this.props.back });
 	};
 
-	handleClickLogin = () => {
-		this.setState({ backPage: '/login' })
-	};
+	constructor(props: any) {
+		super(props);
+
+		this.handleClickBack = this.handleClickBack.bind(this);
+		this.handleClickLogin = this.handleClickLogin.bind(this);
+
+		this.state = {
+			backPage: '',
+			forwardPage: '',
+		};
+	}
 
 	render() {
 		const classes = this.props.classes;
 
+		console.log('Navigation (`back`): ' + this.props.back);
+		console.log('Navigation (`backPage`): ' + this.state.backPage);
+		console.log('Navigation (`forwardPage`): ' + this.state.forwardPage);
+		console.log('Navigation (`current`): ' + this.props.current);
+
 		if (this.state.backPage) {
 			return (
-				<Redirect to={this.state.backPage}/>
+				<Redirect to={'/' + this.state.backPage.replace(/\\/, '/')}/>
+			);
+		} else if (this.state.forwardPage) {
+			return (
+				<Redirect to={'/' + this.state.forwardPage}/>
 			);
 		}
 
@@ -63,9 +87,7 @@ class Navigation extends React.Component {
 						</Typography>
 
 						{
-<<<<<<< HEAD
-=======
-							!this.props.token &&
+							(this.props.token === '' || this.props.token === undefined) &&
 							<Button
 								className="component-tool-right"
 								color="inherit"
@@ -77,33 +99,16 @@ class Navigation extends React.Component {
 						}
 
 						{
->>>>>>> Navigation: Added back button
 							this.props.back &&
 
-							(
-								this.props.token
+							<IconButton
+								className="component-tool-right"
+								color="inherit"
 
-								?
-
-								<IconButton
-									className="component-tool-right"
-									color="inherit"
-
-									onClick={this.handleClickBack}
-								>
-									<Icon>arrow_back</Icon>
-								</IconButton>
-
-								:
-
-								<IconButton
-									color="inherit"
-
-									onClick={this.handleClickBack}
-								>
-									<Icon>arrow_back</Icon>
-								</IconButton>
-							)
+								onClick={this.handleClickBack}
+							>
+								<Icon>arrow_back</Icon>
+							</IconButton>
 						}
 					</Toolbar>
 				</AppBar>

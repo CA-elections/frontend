@@ -11,6 +11,7 @@ export default class extends React.Component {
 		errorMsg: '',
 		token: '',
 	};
+	props: any;
 
 	handleSubmitPassword = (password: string) => {
 		let token = '';
@@ -40,20 +41,30 @@ export default class extends React.Component {
 	}
 
 	render() {
-		return (
-			<Layout back="" token="###---###">
-	      <Grid
-	        container
-	        spacing={24}
-	        direction="column"
-	        alignContent="center"
-	        alignItems="center"
-	        justify="center"
+		let from = this.props.match.params.from.replace(/\//, '\\');
 
-	        className="layout-grid-content"
-	      >
+		console.log('AdminAuth (`from`): ' + from);
+
+		return (
+			<Layout
+				back={from}
+				token="###---###"
+				title="Přihlásit se"
+				desc="Zadejte údaje administrátora"
+			>
+				<Grid
+					container
+					spacing={24}
+					direction="column"
+					alignContent="center"
+					alignItems="center"
+					justify="center"
+
+					className="layout-grid-content"
+				>
 					<AdminLogin
 						token={this.state.token}
+						from={from}
 						errorMsg={this.state.errorMsg}
 						onSubmit={this.handleSubmitPassword}
 					/>

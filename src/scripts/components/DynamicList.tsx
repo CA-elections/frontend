@@ -27,47 +27,41 @@ const styles = (theme: any) => ({
 
 
 class DynamicList extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
+	static propTypes = {
+		classes: PropTypes.object.isRequired,
 
-    detail: PropTypes.bool,
+		detail: PropTypes.bool,
 
-    electionStart: PropTypes.string,
-    electionEnd: PropTypes.string,
+		electionStart: PropTypes.string,
+		electionEnd: PropTypes.string,
 
-    children: PropTypes.arrayOf(PropTypes.object).isRequired,
-  };
-  props: any;
+		children: PropTypes.arrayOf(PropTypes.object).isRequired,
+	};
+	props: any;
 
-  render() {
-    const classes = this.props.classes;
+	render() {
+		const classes = this.props.classes;
 
-    return (
-      <div
+		return (
+			<div className={classNames('layout-grid-content', 'layout-container')}>
+				<Paper className="layout-container">
+					<div className={classNames('layout-grid-inner')}>
+						{
+							this.props.detail
+							?
+							<Typography className={classes.secondaryHeading}>
+								{this.props.electionStart} - {this.props.electionEnd}
+							</Typography>
+							:
+							null
+						}
 
-        className={classNames('layout-grid-content', 'layout-container')}
-      >
-        <Paper className="layout-container">
-          <div
-
-            className={classNames('layout-grid-inner')}
-          >
-            {
-              this.props.detail
-              ?
-              <Typography className={classes.secondaryHeading}>
-                {this.props.electionStart} - {this.props.electionEnd}
-              </Typography>
-              :
-              null
-            }
-
-            {this.props.children}
-          </div>
-        </Paper>
-      </div>
-    );
-  }
+						{this.props.children}
+					</div>
+				</Paper>
+			</div>
+		);
+	}
 }
 
 

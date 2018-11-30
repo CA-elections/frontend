@@ -15,6 +15,8 @@ import DynamicList from '../components/DynamicList';
 import date_to_string from '../utils/date_to_string';
 import ElectionExpandPanel from '../components/ElectionExpandPanel';
 
+import * as fetchTools from '../utils/fetchTools';
+
 
 const styles = (theme: any) => ({
 	root: {
@@ -28,20 +30,22 @@ class Frontpage extends React.Component {
 	props: any;
 
 	handleShowElectionDetails = (id: any) => {
+		console.log('Frontpage: `' + id + '` ::: `' + this.state.token + '`');
+
 		this.setState({ showDetail: true, electionId: id });
 	};
 
 	updateStateWithData = (data: any) => {
-    if (data === []) {
+		if (data === []) {
 			this.setState({ empty: true });
 
 		} else {
 			this.setState({ empty: false, elections: this.processElections(data) });
 		}
-  };
+	};
 
-  processElections = (elections: any) => {
-    let a = elections.map((election: any, i: any) => {
+	processElections = (elections: any) => {
+		let a = elections.map((election: any, i: any) => {
 			//alert(Date.parse(election.date_start) <= Date.now() && Date.now() <= Date.parse(election.date_end) ? 'progress' : null);
 			return (<ElectionExpandPanel
 				key={election.id}
@@ -57,10 +61,10 @@ class Frontpage extends React.Component {
 		});
 
 		return a;
-  };
+	};
 
-  _updateWithDummyData = () => {
-    this.updateStateWithData([
+	_updateWithDummyData = () => {
+		this.updateStateWithData([
 			{
 				'id': 1,
 				'date_start': '2018-01-01T00:00',
@@ -68,30 +72,47 @@ class Frontpage extends React.Component {
 				'is_student': true,
 			},
 		]);
-  };
+	};
 
-  fetchData = () => {
-    fetch('http://hmmmm.magnusi.tech/api/election',
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-	    )
+	fetchData = () => {
+		fetch('http://hmmmm.magnusi.tech/api/election',
+			{
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		)
+		.then(response => response.json())
+		.then(data => {
+			this.updateStateWithData(data);
+		}).catch((e: any) => {
+			//this._updateWithDummyData();
+			// TODO: Error
+		});
+	};
 
-	    .then(response => response.json())
-	    .then(data => {
-	      this.updateStateWithData(data);
-	    }).catch((e: any) => {
-	      //this._updateWithDummyData();
-				// TODO: Error
-	    });
-  };
+	checkTokenValid = () => {
+		let t = this.props.match.params.token;
+
+		if (t === '###invalid') {
+			this.state.invalidToken = true;
+			this.state.token = '';
+
+			return false;
+
+		} else {
+			this.state.invalidToken = false;
+			this.state.token = t;
+
+			return true;
+		}
+	};
 
 	state = {
 		elections: [] as Element[],
 		empty: true,
 		showDetail: false,
+		invalidToken: false,
 		electionId: '',
 		token: ''
 	};
@@ -103,9 +124,12 @@ class Frontpage extends React.Component {
 			elections: [] as Element[],
 			empty: true,
 			showDetail: false,
+			invalidToken: false,
 			electionId: '',
-			token: this.props.match.params.token,
+			token: (this.props.match.params.token || ''),
 		};
+
+		console.log(this.props.match.params.token);
 
 		this.handleShowElectionDetails = this.handleShowElectionDetails.bind(this);
 		this.fetchData();
@@ -127,13 +151,20 @@ class Frontpage extends React.Component {
 		}
 
 		return (
-			<Layout title="Přehled" token={this.state.token}>
+			<Layout
+				title="Přehled"
+				desc={this.checkTokenValid()}
+				token={this.state.token}
+				current={'front'}
+				back=""
+			>
 				<div className={classes.root}>
-						{this.state.elections}
+					{this.state.elections}
 				</div>
 			</Layout>
 		);
 	}
 }
+
 
 export default withStyles(styles)(Frontpage);

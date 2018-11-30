@@ -24,131 +24,131 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 export default class AdminLogin extends React.Component {
-  static propTypes = {
-    errorMsg: PropTypes.string.isRequired,
-    token: PropTypes.string.isRequired,
+	static propTypes = {
+		errorMsg: PropTypes.string.isRequired,
+		token: PropTypes.string.isRequired,
 
-    onSubmit: PropTypes.object.isRequired
-  };
+		onSubmit: PropTypes.func.isRequired
+	};
+	props: any;
 
-  props: any;
+	state = {
+		password: '',
+		showPassword: false,
 
-  state = {
-    password: '',
-    showPassword: false,
+		error: false,
+		errorText: '',
 
-    error: false,
-    errorText: '',
+		accepted: false,
+		token: '',
+	}
 
-    accepted: false,
-    token: '',
-  }
+	handleChangePassword = (event: any) => {
+		this.setState({ password: event.target.value });
+	};
 
-  handleChangePassword = (event: any) => {
-    this.setState({ password: event.target.value });
-  };
+	handleClickShowPassword = () => {
+		this.setState({ showPassword: !this.state.showPassword });
+	};
 
-  handleClickShowPassword = () => {
-    this.setState({ showPassword: !this.state.showPassword });
-  };
+	handleClickSubmit = () => {
+		if (this.state.password === '') {
+			this.setState({ error: true, errorText: 'Vyplňte heslo' });
 
-  handleClickSubmit = () => {
-    if (this.state.password === '') {
-      this.setState({ error: true, errorText: 'Vyplňte heslo' });
+		} else {
+			this.state.error = false;
+			this.props.onSubmit(this.state.password);
+		}
+	};
 
-    } else {
-      this.state.error = false;
-      this.props.onSubmit(this.state.password);
-    }
-  };
+	constructor(props: any) {
+		super(props);
 
-  constructor(props: any) {
-    super(props);
+		this.handleClickSubmit = this.handleClickSubmit.bind(this);
+		this.handleChangePassword = this.handleChangePassword.bind(this);
+		this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
 
-    this.handleClickSubmit = this.handleClickSubmit.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
+		this.state = {
+			password: '',
+			showPassword: false,
 
-    this.state = {
-      password: '',
-      showPassword: false,
+			error: props.errorMsg !== '',
+			errorText: props.errorMsg,
 
-      error: props.errorMsg !== '',
-      errorText: props.errorMsg,
+			accepted: this.props.token !== '',
+			token: props.token,
+		};
+	}
 
-      accepted: this.props.token !== '',
-      token: props.token,
-    };
-  }
+	render() {
+		console.log('AdminLogin (`token`): ' + this.props.token);
+		console.log('AdminLogin (`from`): ' + this.props.from);
 
-  render() {
-    if (this.props.token) {
-      return (
-        // TODO: Redirect to overview with token
-        <Redirect to={'/front/' + this.props.token} />
-      );
-    }
+		if (this.props.token) {
+			return (
+				<Redirect to={'/' + this.props.from + '/' + this.props.token} />
+			);
+		}
 
-    return (
-          <Paper className="layout-container">
-            <Grid
-              container
-              spacing={24}
-              direction="column"
-              alignItems="center"
-              justify="center"
+		return (
+			<Paper className="layout-container">
+				<Grid
+					container
+					spacing={24}
+					direction="column"
+					alignItems="center"
+					justify="center"
 
-              className={classNames('layout-grid-inner', 'layout-container')}
-            >
-              <Grid item md="auto">
-                <FormControl className="text-field">
-                  <InputLabel
-                    htmlFor="passwordField"
-                    error={this.state.error || this.props.errorMsg}
-                  >
-                    Heslo
-                  </InputLabel>
+					className={classNames('layout-grid-inner', 'layout-container')}
+				>
+					<Grid item md="auto">
+						<FormControl className="text-field">
+							<InputLabel
+								htmlFor="passwordField"
+								error={this.state.error || this.props.errorMsg !== ''}
+							>
+								Heslo
+							</InputLabel>
 
-                  <Input
-                    id="passwordField"
-                    type={this.state.showPassword ? 'text' : 'password'}
-                    value={this.state.password}
-                    onChange={this.handleChangePassword}
-                    error={this.state.error || this.props.errorMsg}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Přepnout viditelnost hesla"
-                          onClick={this.handleClickShowPassword}
-                        >
-                          {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                { (this.state.error) &&
-                  <FormHelperText>{this.state.errorText}</FormHelperText>
-                }
-                {
-                  (this.props.errorMsg && !this.state.error) &&
-                  <FormHelperText>{this.props.errorMsg}</FormHelperText>
-                }
-              </Grid>
+							<Input
+								id="passwordField"
+								type={this.state.showPassword ? 'text' : 'password'}
+								value={this.state.password}
+								onChange={this.handleChangePassword}
+								error={this.state.error || this.props.errorMsg !== ''}
+								endAdornment={
+									<InputAdornment position="end">
+									<IconButton
+										aria-label="Přepnout viditelnost hesla"
+										onClick={this.handleClickShowPassword}
+									>
+										{this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+									</IconButton>
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
+						{ (this.state.error) &&
+							<FormHelperText>{this.state.errorText}</FormHelperText>
+						}
+						{
+							(this.props.errorMsg && !this.state.error) &&
+							<FormHelperText>{this.props.errorMsg}</FormHelperText>
+						}
+					</Grid>
 
-              <Grid item md="auto">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="layout-button"
-                  onClick={this.handleClickSubmit}
-                >
-                  Přihlásit
-                </Button>
-              </Grid>
-            </Grid>
-          </Paper>
-
-    );
-  }
+					<Grid item md="auto">
+						<Button
+							variant="contained"
+							color="primary"
+							className="layout-button"
+							onClick={this.handleClickSubmit}
+						>
+							Přihlásit
+						</Button>
+					</Grid>
+				</Grid>
+			</Paper>
+		);
+	}
 }
