@@ -19,7 +19,7 @@ export default class extends React.Component {
 	handleSubmitPassword = (password: string) => {
 		let token = '';
 
-		fetch(fetchTools.call('token-auth', true),
+		fetch(fetchTools.call('token-auth', false),
 			{
 				headers: {
 					'Content-Type': 'application/json',

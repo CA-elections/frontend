@@ -124,43 +124,43 @@ export default class extends React.Component {
 	// 		date_start: '2001-01-01T00:00',
 	// 		date_end: '2002-02-02T00:00',
 	// 		is_student: true,
-	// 		candidates: [
-	// 			{
-	// 				id: 1,
-	// 				name: 'Foo',
-	// 				surname: 'FooS',
-	// 				annotation: 'Blah blah blah',
-	// 				votes: 15
-	// 			},
-	// 			{
-	// 				id: 2,
-	// 				name: 'Bar',
-	// 				surname: 'BarS',
-	// 				annotation: 'Blah blah blah',
-	// 				votes: 32
-	// 			},
-	// 			{
-	// 				id: 3,
-	// 				name: 'Baz',
-	// 				surname: 'BazS',
-	// 				annotation: 'Blah blah blah',
-	// 				votes: 51
-	// 			},
-	// 			{
-	// 				id: 4,
-	// 				name: 'Qux',
-	// 				surname: 'QuxS',
-	// 				annotation: 'Blah blah blah',
-	// 				votes: 16
-	// 			},
-	// 			{
-	// 				id: 5,
-	// 				name: 'Pox',
-	// 				surname: 'PoxS',
-	// 				annotation: 'Blah blah blah',
-	// 				votes: 43
-	// 			},
-	// 		]
+			// candidates: [
+			// 	{
+			// 		id: 1,
+			// 		name: 'Foo',
+			// 		surname: 'FooS',
+			// 		annotation: 'Blah blah blah',
+			// 		votes: 15
+			// 	},
+			// 	{
+			// 		id: 2,
+			// 		name: 'Bar',
+			// 		surname: 'BarS',
+			// 		annotation: 'Blah blah blah',
+			// 		votes: 32
+			// 	},
+			// 	{
+			// 		id: 3,
+			// 		name: 'Baz',
+			// 		surname: 'BazS',
+			// 		annotation: 'Blah blah blah',
+			// 		votes: 51
+			// 	},
+			// 	{
+			// 		id: 4,
+			// 		name: 'Qux',
+			// 		surname: 'QuxS',
+			// 		annotation: 'Blah blah blah',
+			// 		votes: 16
+			// 	},
+			// 	{
+			// 		id: 5,
+			// 		name: 'Pox',
+			// 		surname: 'PoxS',
+			// 		annotation: 'Blah blah blah',
+			// 		votes: 43
+			// 	},
+			// ]
 	// 	});
 	// };
 

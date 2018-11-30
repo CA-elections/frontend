@@ -9,14 +9,14 @@ export default class extends React.Component {
 	props: any;
 
 	requestCreateElection = (elections: any) => {
-		fetch(fetchTools.call('election', true),
+		fetch(fetchTools.call('election/special', true),
 		{
 			headers: {
 				'Content-Type': 'application/json',
 				'Authorization': 'Token ' + this.props.match.params.token,
 			},
 			method: 'POST',
-			body: JSON.stringify(elections);
+			body: JSON.stringify(elections),
 		})
 		.then((response: any) => {
 			return response.json();
