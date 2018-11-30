@@ -46,7 +46,6 @@ class Frontpage extends React.Component {
 
 	processElections = (elections: any) => {
 		let a = elections.map((election: any, i: any) => {
-			//alert(Date.parse(election.date_start) <= Date.now() && Date.now() <= Date.parse(election.date_end) ? 'progress' : null);
 			return (<ElectionExpandPanel
 				key={election.id}
 				electionId={election.id.toString()}
