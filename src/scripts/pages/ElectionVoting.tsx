@@ -72,8 +72,12 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 
 	sendVote() {
 		fetch('http://hmmmm.magnusi.tech/api/vote/' + this.props.match.params.token + '/', { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
-			.then((d) => alert("hlasování bylo úspěšné"))
-			.catch(() => alert("nepodařilo se odeslat hlasy"));
+			.then((d) => {
+				if (d.status >= 200 && d.status < 300)
+					alert("hlasování bylo úspěšné")
+				else
+					alert("nepodařilo se odeslat hlasy")
+			});
 	}
 
 	render() {
