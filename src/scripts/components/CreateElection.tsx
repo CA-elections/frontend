@@ -24,6 +24,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import IconButton from "@material-ui/core/IconButton";
+import Delete from '@material-ui/icons/Delete';
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
@@ -60,7 +61,7 @@ class Candidate extends React.Component {
 
 	render() {
 		return (
-			<Grid>
+			<Grid style={{position: 'relative'}}>
 				<TextField
 					id="standard-name"
 					label="Jméno"
@@ -82,6 +83,9 @@ class Candidate extends React.Component {
 					onChange={this.onChange.annotation}
 					margin="normal"
 				/>
+				<IconButton aria-label="Delete" onClick={this.props.onDelete} style={{transform: 'translateY(-50%)', position: 'absolute', top:'65%'}}>
+		          <Delete fontSize="small" />
+		        </IconButton>
 			</Grid>
 		);
 	}
@@ -176,6 +180,17 @@ export default class CreateElection extends React.Component {
 					candidates_len: state.candidates_len + 1
 				};
 			});
+		},
+		removeCandidate: (candidate_id: any) => (e: any) => {
+			e.preventDefault();
+			this.setState(function(state: any) {
+				let new_candidates = state.candidates;
+				new_candidates.splice(candidate_id, 1);
+				return {
+					candidates: new_candidates,
+					candidates_len: state.candidates_len - 1,
+				};
+			})
 		}
 	};
 
@@ -204,6 +219,7 @@ export default class CreateElection extends React.Component {
 					key={i}
 					candidate={this.state.candidates[i]}
 					onChange={this.onUpdate.candidate(i)}
+					onDelete={this.handleClick.removeCandidate(i)}
 				/>
 			);
 		}
