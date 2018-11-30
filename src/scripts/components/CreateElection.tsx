@@ -249,6 +249,7 @@ export default class CreateElection extends React.Component {
 							<TextField
 								id="dateEndField"
 								label="Datum konce (MM-DD-YYYY)"
+								type="datetime-local"
 								value={this.state.date_end}
 								onChange={this.onUpdate.date_end}
 								InputLabelProps={{
