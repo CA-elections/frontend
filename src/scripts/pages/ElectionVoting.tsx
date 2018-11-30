@@ -72,7 +72,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 	}
 
 	sendVote() {
-		fetch(fetchTools.call('api/vote/' + this.props.match.params.token, false), { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
+		fetch(fetchTools.call('vote/' + this.props.match.params.token, false), { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
 			.then((d) => {
 				if (d.status >= 200 && d.status < 300)
 					alert("hlasování bylo úspěšné")
