@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack -w &",
-    "dev": "npm run webpack && browser-sync --port 8080 --server --files \"./*\""
+    "webpack-dev": "webpack -w --define process.env.URL=\"'hmmmm.magnusi.tech'\" &",
+    "webpack-prod": "webpack -w --define process.env.URL=\"'localhost:9000'\" &",
+    "dev": "npm run webpack-dev && browser-sync --port 8080 --server --files \"./*\"",
+    "prod": "npm run webpack-prod && browser-sync --port 8080 --server --files \"./*\"",
   },
   "repository": {
     "type": "git",
