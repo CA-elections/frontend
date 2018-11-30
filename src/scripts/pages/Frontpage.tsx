@@ -15,7 +15,7 @@ import DynamicList from '../components/DynamicList';
 import date_to_string from '../utils/date_to_string';
 import ElectionExpandPanel from '../components/ElectionExpandPanel';
 
-import * as fetchTools from '../utils/fetchTools';
+import fetchTools from '../utils/fetchTools';
 
 
 const styles = (theme: any) => ({
@@ -75,7 +75,7 @@ class Frontpage extends React.Component {
 	};
 
 	fetchData = () => {
-		fetch('http://hmmmm.magnusi.tech/api/election',
+		fetch(fetchTools.call('election', false),
 			{
 				headers: {
 					'Content-Type': 'application/json',

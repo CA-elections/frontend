@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import Button from "@material-ui/core/Button/Button";
 
+import fetchTools from "../utils/fetchTools";
+
 interface ElectionVotingProps {
 	match: any
 }
@@ -34,15 +36,14 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 	}
 
 	fetchCodeData() {
-		const baseUrl = "http://hmmmm.magnusi.tech/api";
-		fetch(baseUrl + "/notification/" + this.props.match.params.token)
+		fetch(fetchTools.call('notification/' + this.props.match.params.token, false))
 			.then(result => {
 				return result.json();
 			})
 			.then(result => {
 				this.setState(result)
 
-				fetch(baseUrl + "/election/" + this.state.election_id)
+				fetch(fetchTools.call('election/' + this.state.election_id, false))
 					.then(result => {
 						return result.json();
 					})
@@ -71,7 +72,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 	}
 
 	sendVote() {
-		fetch('http://hmmmm.magnusi.tech/api/vote/' + this.props.match.params.token + '/', { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
+		fetch(fetchTools.call('api/vote/' + this.props.match.params.token, false), { method: "POST", body: JSON.stringify({ candidates: this.state.votes }), headers: { "Content-Type": "application/json" }})
 			.then((d) => {
 				if (d.status >= 200 && d.status < 300)
 					alert("hlasování bylo úspěšné")

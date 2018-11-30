@@ -4,6 +4,7 @@ import Layout from "../layout";
 
 import Grid from '@material-ui/core/Grid';
 
+import fetchTools from "../utils/fetchTools";
 
 const admin_username = 'user';
 
@@ -18,7 +19,7 @@ export default class extends React.Component {
 	handleSubmitPassword = (password: string) => {
 		let token = '';
 
-		fetch('http://hmmmm.magnusi.tech/api/token-auth/',
+		fetch(fetchTools.call('token-auth', true),
 			{
 				headers: {
 					'Content-Type': 'application/json',
@@ -29,7 +30,6 @@ export default class extends React.Component {
 		)
 			.then(response => response.json())
 			.then(data => {
-				//alert(JSON.stringify(data));
 				if (data.token) {
 					this.setState({ token: data.token, fetchInProgress: false });
 
