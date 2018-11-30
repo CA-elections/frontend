@@ -37,12 +37,14 @@ export default class extends React.Component {
 		}
 
 		console.log('CreateElectionPage (`from`): ' + from);
+
 		return (
 			<Layout
 				title='Vytvořit volby'
 				token={token}
 				back={from + '\\' + token}
 				current={'create-election/' + token}
+				thisIsCreateElections
 			>
 				<CreateElection
 					onSubmit={this.requestCreateElection}

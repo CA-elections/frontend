@@ -16,6 +16,7 @@ export default function(props: any) {
 				back={back}
 				current={current}
 				token={props.token}
+				thisIsCreateElections={props.thisIsCreateElections}
 			/>
 
 			<div className="layout-wrapper">

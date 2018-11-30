@@ -238,7 +238,7 @@ export default class CreateElection extends React.Component {
 						<FormControl>
 							<TextField
 								id="dateStartField"
-								label="Datum začátku"
+								label="Datum začátku (MM-DD-YYYY)"
 								type="datetime-local"
 								value={this.state.date_start}
 								onChange={this.onUpdate.date_start}
@@ -248,8 +248,7 @@ export default class CreateElection extends React.Component {
 							/>
 							<TextField
 								id="dateEndField"
-								label="Datum konce"
-								type="datetime-local"
+								label="Datum konce (MM-DD-YYYY)"
 								value={this.state.date_end}
 								onChange={this.onUpdate.date_end}
 								InputLabelProps={{

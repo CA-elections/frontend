@@ -29,6 +29,7 @@ class Navigation extends React.Component {
 		back: PropTypes.string.isRequired,
 		current: PropTypes.string.isRequired,
 		token: PropTypes.string.isRequired,
+		noCreateElections: PropTypes.bool,
 	};
 	props: any;
 
@@ -46,8 +47,16 @@ class Navigation extends React.Component {
 	};
 
 	handleClickBack = () => {
-		//console.log(this.props.back);
-		this.setState({ backPage: this.props.back });
+		if (this.props.thisIsCreateElections) {
+			let sure = confirm('Chcete tuto stránku opravdu opustit? Přijdete o současné nastavení!');
+
+			if (sure) {
+				this.setState({ backPage: this.props.back });
+			}
+
+		} else {
+			this.setState({ backPage: this.props.back });
+		}
 	};
 
 	constructor(props: any) {
@@ -104,7 +113,7 @@ class Navigation extends React.Component {
 						}
 
 						{
-							(this.props.token !== '' && this.props.token !== '###---###' && this.props.token !== undefined) &&
+							(this.props.token !== '' && this.props.token !== '###---###' && this.props.token !== undefined && !this.props.thisIsCreateElections) &&
 							<Button
 								className="component-tool-right"
 								color="inherit"
