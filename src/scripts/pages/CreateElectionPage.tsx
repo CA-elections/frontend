@@ -44,7 +44,7 @@ export default class extends React.Component {
 		console.log('CreateElectionPage (`from`): ' + from);
 
 		if (this.state.back) {
-			return <Redirect to={from}/>
+			return <Redirect to={from.replace(/\\/, '/') + '/' + token}/>
 		}
 
 		return (
