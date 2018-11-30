@@ -42,7 +42,7 @@ class Navigation extends React.Component {
 	};
 
 	handleClickAddElection = () => {
-		this.setState({ forwardPage: 'create-election/' + this.props.token + '/' + this.props.current.replace(/\//, '\\') });
+		this.setState({ forwardPage: 'create-election/' + this.props.token + '/' + this.props.current.replace(/\//, '\\')/* + '\\' + this.props.token*/ });
 	};
 
 	handleClickBack = () => {

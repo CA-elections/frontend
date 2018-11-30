@@ -33,12 +33,12 @@ export default class extends React.Component {
 		if (!token) {
 			return <Redirect to="/front"/>
 		}
-
+		console.log('CreateElectionPage (`from`): ' + from);
 		return (
 			<Layout
 				title='Vytvořit volby'
 				token={token}
-				back={from}
+				back={from + '/' + token}
 				current={'create-election/' + token}
 			>
 				<CreateElection
