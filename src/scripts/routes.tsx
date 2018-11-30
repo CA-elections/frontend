@@ -17,7 +17,7 @@ class RoutesView extends React.Component {
                 <Route exact path='/login/:from' component={AdminAuth}/>
 				<Route exact path='/election-voting/:token' component={ElectionVoting}/>
                 <Route exact path='/detail/:id/:token?' component={ElectionDetailPage}/>
-				<Route exact path='/create-election/:token' component={CreateElectionPage}/>
+				<Route exact path='/create-election/:token/:from' component={CreateElectionPage}/>
             </Switch>
         );
     }

@@ -41,6 +41,10 @@ class Navigation extends React.Component {
 		this.setState({ forwardPage: 'login/' + this.props.current.replace(/\//, '\\') });
 	};
 
+	handleClickAddElection = () => {
+		this.setState({ forwardPage: 'create-election/' + this.props.token + '/' + this.props.current.replace(/\//, '\\')/* + '\\' + this.props.token*/ });
+	};
+
 	handleClickBack = () => {
 		//console.log(this.props.back);
 		this.setState({ backPage: this.props.back });
@@ -95,6 +99,18 @@ class Navigation extends React.Component {
 								onClick={this.handleClickLogin}
 							>
 								Přihlásit se
+							</Button>
+						}
+
+						{
+							(this.props.token !== '' && this.props.token !== '###---###' && this.props.token !== undefined) &&
+							<Button
+								className="component-tool-right"
+								color="inherit"
+
+								onClick={this.handleClickAddElection}
+							>
+								Vytvořit volby
 							</Button>
 						}
 

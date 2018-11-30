@@ -38,7 +38,7 @@ export default class extends React.Component {
 		let start = date_to_string(data.date_start);
 		let end = date_to_string(data.date_end);
 
-		console.log(data);
+		console.log('ElectionDetailPage (`update`): ' + JSON.stringify(data));
 
 		this.setState({
 			electionStart: start,
@@ -62,7 +62,7 @@ export default class extends React.Component {
 		let start = date_to_string(data.date_start);
 		let end = date_to_string(data.date_end);
 
-		console.log('ElectionDetailPage (`updateAdmin`): ' + data.toString());
+		console.log('ElectionDetailPage (`updateAdmin`): ' + JSON.stringify(data));
 
 		this.setState({
 			electionStart: start,
@@ -93,14 +93,14 @@ export default class extends React.Component {
 	};
 
 	processCandidatesAdmin = (candidates: any) => {
-		let total = candidates.reduce((a: any, b: any) => {
-			console.log(JSON.stringify(a));
-			console.log(JSON.stringify(b));
+		let total = 0;
 
-			return (a.votes + b.votes);
-		});
+		for (let x of candidates) {
+			total += x.votes;
+		}
 
-		console.log('ElectionDetailPage (`processAdmin`): ' + JSON.stringify(candidates))
+		console.log('ElectionDetailPage (`processAdmin`): ' + JSON.stringify(candidates));
+		console.log('ElectionDetailPage (`total`): ' + total.toString());
 
 		let a = candidates.map((x: any, i: any) => {
 			return <CandidateDetail

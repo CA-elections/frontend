@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 
 import fetchTools from "../utils/fetchTools";
 
+const admin_username = 'user';
+
 export default class extends React.Component {
 	state = {
 		fetchInProgress: true,
@@ -23,7 +25,7 @@ export default class extends React.Component {
 					'Content-Type': 'application/json',
 				},
 				method: 'POST',
-				body: JSON.stringify({ username: 'user', password: password })
+				body: JSON.stringify({ username: admin_username, password: password })
 			}
 		)
 			.then(response => response.json())
@@ -41,7 +43,7 @@ export default class extends React.Component {
 	}
 
 	render() {
-		let from = this.props.match.params.from.replace(/\//, '\\');
+		let from = this.props.match.params.from;
 
 		console.log('AdminAuth (`from`): ' + from);
 
