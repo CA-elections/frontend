@@ -77,7 +77,6 @@ export default class extends React.Component {
 	processCandidates = (candidates: any) => {
 		let a = candidates.map((x: any, i: any) => {
 			return <CandidateDetail
-				admin
 				{ ...this.state.isStudent && 'student' }
 
 				name={x.name + ' ' + x.surname}
@@ -99,8 +98,11 @@ export default class extends React.Component {
 			return (a.votes + b.votes);
 		});
 
+		console.log('ElectionDetailPage (`processAdmin`): ' + JSON.stringify(candidates))
+
 		let a = candidates.map((x: any, i: any) => {
 			return <CandidateDetail
+				admin
 				{ ...this.state.isStudent && 'student' }
 
 				name={x.name + ' ' + x.surname}

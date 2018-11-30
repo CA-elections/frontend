@@ -82,14 +82,19 @@ class CandidateExpandPanel extends React.Component {
 
 						<Grid item md={6}>
 							<Typography variant="h4">
-								{this.props.percent} %
+								{
+									isNaN(this.props.percent) ?
+									'Nikdo nehlasoval'
+									: this.props.percent.toString() + ' %'
+								}
 							</Typography>
 						</Grid>
 
 						{
+							this.props.admin &&
 							<Grid item md={6}>
 								<Typography variant="h4">
-									{this.props.percent} hlasů
+									{this.props.votes} hlasů
 								</Typography>
 							</Grid>
 						}
