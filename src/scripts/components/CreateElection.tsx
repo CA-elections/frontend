@@ -101,8 +101,8 @@ export default class CreateElection extends React.Component {
 	state = {
 		candidates: [] as object[],
 		candidates_len: 0,
-		startingDate: "2012-12-12T12:12",
-		endDate: "2012-12-12T12:12",
+		date_start: "2012-12-12T12:12",
+		date_end: "2012-12-12T12:12",
 		isStudent: false,
 		name: "",
 		description: "",
@@ -116,8 +116,8 @@ export default class CreateElection extends React.Component {
 		this.state = {
 			candidates: [],
 			candidates_len: 0,
-			startingDate: "2012-12-12T12:12",
-			endDate: "2012-12-12T12:12",
+			date_start: "2012-12-12T12:12",
+			date_end: "2012-12-12T12:12",
 			isStudent: false,
 			name: "elections",
 			description: "",
@@ -127,12 +127,12 @@ export default class CreateElection extends React.Component {
 	}
 
 	onUpdate = {
-		startingDate: (e: any) => {
-			this.setState({ startingDate: e.target.value });
+		date_start: (e: any) => {
+			this.setState({ date_start: e.target.value });
 		},
-		endDate: (e: any) => {
+		date_end: (e: any) => {
 			this.setState({
-				endDate: e.target.value
+				date_end: e.target.value
 			});
 		},
 		candidate: (index: any) => (candidate: any) => {
@@ -182,7 +182,13 @@ export default class CreateElection extends React.Component {
 	handleClickSubmit = () => {
 		//
 
-		this.props.onSubmit(this.state.candidates);
+		this.props.onSubmit({
+			name: 'elections',
+			is_student: this.state.isStudent,
+			candidates: this.state.candidates,
+			date_start: this.state.date_start,
+			date_end: this.state.date_end,
+		});
 	};
 
 	render() {
@@ -218,8 +224,8 @@ export default class CreateElection extends React.Component {
 								id="dateStartField"
 								label="Datum začátku"
 								type="datetime-local"
-								value={this.state.startingDate}
-								onChange={this.onUpdate.startingDate}
+								value={this.state.date_start}
+								onChange={this.onUpdate.date_start}
 								InputLabelProps={{
 									shrink: true
 								}}
@@ -228,8 +234,8 @@ export default class CreateElection extends React.Component {
 								id="dateEndField"
 								label="Datum konce"
 								type="datetime-local"
-								value={this.state.endDate}
-								onChange={this.onUpdate.endDate}
+								value={this.state.date_end}
+								onChange={this.onUpdate.date_end}
 								InputLabelProps={{
 									shrink: true
 								}}
