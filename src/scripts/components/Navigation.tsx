@@ -55,6 +55,7 @@ class Navigation extends React.Component {
 
 		this.handleClickBack = this.handleClickBack.bind(this);
 		this.handleClickLogin = this.handleClickLogin.bind(this);
+		this.handleClickAddElection = this.handleClickAddElection.bind(this);
 
 		this.state = {
 			backPage: '',

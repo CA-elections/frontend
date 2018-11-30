@@ -9,6 +9,8 @@ export default class extends React.Component {
 	props: any;
 
 	requestCreateElection = (elections: any) => {
+		console.log(JSON.stringify(elections));
+
 		fetch(fetchTools.call('election/special', true),
 		{
 			headers: {
@@ -22,7 +24,7 @@ export default class extends React.Component {
 			return response.json();
 		})
 		.then((data: any) => {
-			//
+			console.log('CreateElectionPage (`data`): ' + data);
 		});
 	};
 

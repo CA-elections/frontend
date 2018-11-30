@@ -24,6 +24,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import IconButton from "@material-ui/core/IconButton";
+import Delete from '@material-ui/icons/Delete';
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
@@ -60,7 +61,7 @@ class Candidate extends React.Component {
 
 	render() {
 		return (
-			<Grid>
+			<Grid style={{position: 'relative'}}>
 				<TextField
 					id="standard-name"
 					label="Jméno"
@@ -82,6 +83,9 @@ class Candidate extends React.Component {
 					onChange={this.onChange.annotation}
 					margin="normal"
 				/>
+				<IconButton aria-label="Delete" onClick={this.props.onDelete} style={{transform: 'translateY(-50%)', position: 'absolute', top:'65%'}}>
+		          <Delete fontSize="small" />
+		        </IconButton>
 			</Grid>
 		);
 	}
@@ -101,8 +105,8 @@ export default class CreateElection extends React.Component {
 	state = {
 		candidates: [] as object[],
 		candidates_len: 0,
-		startingDate: "2012-12-12T12:12",
-		endDate: "2012-12-12T12:12",
+		date_start: "2012-12-12T12:12",
+		date_end: "2012-12-12T12:12",
 		isStudent: false,
 		name: "",
 		description: "",
@@ -116,8 +120,8 @@ export default class CreateElection extends React.Component {
 		this.state = {
 			candidates: [],
 			candidates_len: 0,
-			startingDate: "2012-12-12T12:12",
-			endDate: "2012-12-12T12:12",
+			date_start: "2012-12-12T12:12",
+			date_end: "2012-12-12T12:12",
 			isStudent: false,
 			name: "elections",
 			description: "",
@@ -127,12 +131,12 @@ export default class CreateElection extends React.Component {
 	}
 
 	onUpdate = {
-		startingDate: (e: any) => {
-			this.setState({ startingDate: e.target.value });
+		date_start: (e: any) => {
+			this.setState({ date_start: e.target.value });
 		},
-		endDate: (e: any) => {
+		date_end: (e: any) => {
 			this.setState({
-				endDate: e.target.value
+				date_end: e.target.value
 			});
 		},
 		candidate: (index: any) => (candidate: any) => {
@@ -176,13 +180,30 @@ export default class CreateElection extends React.Component {
 					candidates_len: state.candidates_len + 1
 				};
 			});
+		},
+		removeCandidate: (candidate_id: any) => (e: any) => {
+			e.preventDefault();
+			this.setState(function(state: any) {
+				let new_candidates = state.candidates;
+				new_candidates.splice(candidate_id, 1);
+				return {
+					candidates: new_candidates,
+					candidates_len: state.candidates_len - 1,
+				};
+			})
 		}
 	};
 
 	handleClickSubmit = () => {
 		//
 
-		this.props.onSubmit(this.state.candidates);
+		this.props.onSubmit({
+			name: 'elections',
+			is_student: this.state.isStudent,
+			candidates: this.state.candidates,
+			date_start: this.state.date_start,
+			date_end: this.state.date_end,
+		});
 	};
 
 	render() {
@@ -198,6 +219,7 @@ export default class CreateElection extends React.Component {
 					key={i}
 					candidate={this.state.candidates[i]}
 					onChange={this.onUpdate.candidate(i)}
+					onDelete={this.handleClick.removeCandidate(i)}
 				/>
 			);
 		}
@@ -218,8 +240,8 @@ export default class CreateElection extends React.Component {
 								id="dateStartField"
 								label="Datum začátku"
 								type="datetime-local"
-								value={this.state.startingDate}
-								onChange={this.onUpdate.startingDate}
+								value={this.state.date_start}
+								onChange={this.onUpdate.date_start}
 								InputLabelProps={{
 									shrink: true
 								}}
@@ -228,8 +250,8 @@ export default class CreateElection extends React.Component {
 								id="dateEndField"
 								label="Datum konce"
 								type="datetime-local"
-								value={this.state.endDate}
-								onChange={this.onUpdate.endDate}
+								value={this.state.date_end}
+								onChange={this.onUpdate.date_end}
 								InputLabelProps={{
 									shrink: true
 								}}
