@@ -100,9 +100,7 @@ class CandidateExpandPanel extends React.Component {
 						}
 
 						<Grid item md={12} className="layout-grid-inner">
-							<Typography variant="body2">
-								{this.props.annotation}
-							</Typography>
+							<Typography variant="body2" dangerouslySetInnerHTML={{__html: this.props.annotation}}/>
 						</Grid>
 					</Grid>
 				</ExpansionPanelDetails>
