@@ -107,8 +107,7 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 								justify="center"
 
 							>
-								<Typography>
-									{value.annotation} Prosím tohle potom smazat, je to tu jenom protože sem nikdo nedal žádnou anotaci
+								<Typography dangerouslySetInnerHTML={{__html: this.props.annotation}}>
 								</Typography>
 								<div className="layout-button-wrapper">
 									<Button
