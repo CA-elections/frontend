@@ -107,8 +107,8 @@ export default class ElectionVoting extends React.Component<ElectionVotingProps>
 								justify="center"
 
 							>
-								<Typography dangerouslySetInnerHTML={{__html: this.props.annotation}}>
-								</Typography>
+								<div dangerouslySetInnerHTML={{__html: value.annotation}}>
+								</div>
 								<div className="layout-button-wrapper">
 									<Button
 										disabled={this.state.votes.indexOf(value.id) === -1}
